@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* ── Backgrounds ──────────────────────────────────────── */
+    --bg:           #FFFFFF;    /* base (hero, clean sections)  */
+    --bg-warm:      #F7F6F2;    /* warm parchment (projects, experience) */
+    --bg-warm-deep: #EFEDE8;    /* deeper warm (tertiary)       */
+    --bg-dark:      #111110;    /* dark sections (footer)       */
+
+    /* ── Surface aliases ──────────────────────────────────── */
+    --surface:         #FFFFFF;
+    --surface-raised:  #FAFAF8;
+
+    /* ── Ink (text) ───────────────────────────────────────── */
+    --ink:   #111110;   /* primary   */
+    --ink-2: #3D3D3C;   /* secondary */
+    --ink-3: #787774;   /* tertiary  */
+    --ink-4: #AEADA9;   /* muted     */
+
+    /* ── Borders ──────────────────────────────────────────── */
+    --border:        #E3E2DE;
+    --border-strong: #C8C7C2;
+
+    /* ── Easing ───────────────────────────────────────────── */
+    --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ── Spacing (8px grid) ───────────────────────────────── */
+    --space-section-y:    96px;
+    --space-section-y-lg: 160px;
+    --page-gutter:        80px;
+    --max-content:        1200px;
+  }
+}
+
+@theme inline {
+  --color-bg:           var(--bg);
+  --color-bg-warm:      var(--bg-warm);
+  --color-bg-dark:      var(--bg-dark);
+  --color-surface:      var(--surface);
+  --color-ink:          var(--ink);
+  --color-ink-2:        var(--ink-2);
+  --color-ink-3:        var(--ink-3);
+  --color-ink-4:        var(--ink-4);
+  --color-border:       var(--border);
+  --color-border-strong:var(--border-strong);
+  --font-sans:    var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-mono:    var(--font-lato), system-ui, sans-serif;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  max-width: 100%;
+  cursor: none;
+}
+
+@media (max-width: 767px) {
+  body { cursor: auto; }
+}
+
+/* ─── Lightbox thumbnail cursor ─────────────────────────── */
+.img-lightbox-thumb {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='13' cy='13' r='9' fill='%23111' /%3E%3Ccircle cx='13' cy='13' r='7' fill='white' /%3E%3Cline x1='10' y1='13' x2='16' y2='13' stroke='%23111' stroke-width='2'/%3E%3Cline x1='13' y1='10' x2='13' y2='16' stroke='%23111' stroke-width='2'/%3E%3Cline x1='19.5' y1='19.5' x2='26' y2='26' stroke='%23111' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") 16 16, zoom-in !important;
+}
+
+/* ─── Global grain overlay ──────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ─── Selection ─────────────────────────────────────────── */
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+
+/* ─── Links ──────────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Section grain (warm sections) ─────────────────────── */
+.section-warm {
+  background: var(--bg-warm);
+  position: relative;
+}
+.section-warm::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+.section-warm > * { position: relative; z-index: 1; }
+
+/* ─── Typography utilities ───────────────────────────────── */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.text-display-upright {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+/* ─── Highlight strokes (doodle accents) ─────────────────── */
+.hl-yellow {
+  background: linear-gradient(176deg, transparent 55%, rgba(255, 214, 0, 0.65) 55%);
+  padding: 0 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.hl-teal {
+  background: linear-gradient(176deg, transparent 55%, rgba(0, 196, 175, 0.52) 55%);
+  padding: 0 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ─── Divider ────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+}
+
+/* ─── Letter bounce entrance animation ───────────────────── */
+@keyframes letter-bounce-in {
+  0%   { transform: translateY(0); }
+  45%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.letter-bounce-in {
+  animation: letter-bounce-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── Project placeholder thumbnails ─────────────────────── */
+.project-thumb-1 { background: #E8E4DC; }
+.project-thumb-2 { background: #DDE0E8; }
+.project-thumb-3 { background: #E0E8E0; }
+.project-thumb-4 { background: #E8DDD8; }
+.project-thumb-5 { background: #E4E0D8; }
+.project-thumb-6 { background: #D8E0E4; }
