@@ -62,6 +62,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} ${playfairDisplay.variable} ${lato.variable} ${atma.variable}`}
     >
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/wue2wvd.css" />
+      </head>
       <body className="min-h-screen flex flex-col bg-[var(--bg)]">
         <PageTransitionOverlay />
         <Cursor />

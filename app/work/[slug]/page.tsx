@@ -14,9 +14,9 @@ const SMOOTH = [0.25, 0.46, 0.45, 0.94] as const;
 // ── Typography ────────────────────────────────────────────────
 const T = {
   projectTitle: {
-    fontFamily:    "var(--font-playfair)",
+    fontFamily:    "Georgia, serif",
     fontStyle:     "normal",
-    fontWeight:    600,
+    fontWeight:    400,
     fontSize:      "clamp(1.5rem, 4vw, 2.5rem)",
     lineHeight:    1.06,
     letterSpacing: "-0.02em",
@@ -91,30 +91,50 @@ function useActiveSection(ids: string[]) {
   return activeId;
 }
 
-// ── TOC — sticky, left column ─────────────────────────────────
+// ── TOC — sticky, left column ──────────────────────────────────
 function TableOfContents({
   sections,
   activeId,
   onBack,
+  visible,
+  contentMaxWidth = 960,
 }: {
   sections: TocSection[];
   activeId: string;
   onBack: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  visible: boolean;
+  contentMaxWidth?: number;
 }) {
   return (
-    <nav aria-label="Case study contents" className="hidden lg:block w-[160px] shrink-0 sticky top-[88px] self-start">
+    <>
+      {/* spacer preserves the 200px column in the flex layout */}
+      <div className="hidden md:block" style={{ width: 200, flexShrink: 0 }} aria-hidden="true" />
+      <nav
+        aria-label="Case study contents"
+        className="hidden md:block"
+        style={{
+          width: 200,
+          flexShrink: 0,
+          position: "fixed",
+          top: 80,
+          left: `max(40px, calc((100vw - ${contentMaxWidth}px) / 2 + 40px))`,
+          opacity: visible ? 1 : 0,
+          pointerEvents: visible ? "auto" : "none",
+          transition: "opacity 0.3s ease",
+        }}
+      >
       <div className="mb-5 pb-5 border-b border-[var(--border)]">
         <a
           href="/"
           onClick={onBack}
-          style={{ ...T.mono, fontFamily: "var(--font-atma)", fontSize: "15px", opacity: 0.38, display: "inline-block", cursor: "pointer", textDecoration: "none" }}
+          style={{ ...T.mono, fontFamily: "var(--font-lato)", fontSize: "15px", opacity: 0.38, display: "inline-block", cursor: "pointer", textDecoration: "none" }}
           className="hover:opacity-70 transition-opacity duration-200"
         >
           ← Work
         </a>
       </div>
 
-      <p style={{ ...T.mono, fontFamily: "var(--font-atma)", fontSize: "15px" }} className="mb-4">Contents</p>
+      <p style={{ ...T.mono, fontFamily: "var(--font-lato)", fontSize: "15px" }} className="mb-4">Contents</p>
       <ul className="space-y-0.5">
         {sections.map((s) => {
           const isActive = activeId === s.id;
@@ -140,7 +160,7 @@ function TableOfContents({
                 <span
                   className="text-[15px] leading-snug transition-colors duration-200 group-hover:text-[var(--ink-2)]"
                   style={{
-                    fontFamily: "var(--font-atma)",
+                    fontFamily: "var(--font-lato)",
                     color:      isActive ? "var(--ink)" : "var(--ink-4)",
                   }}
                 >
@@ -152,6 +172,7 @@ function TableOfContents({
         })}
       </ul>
     </nav>
+    </>
   );
 }
 
@@ -255,6 +276,213 @@ function VideoSlot({ label, aspect = "9/19.5", caption }: { label: string; aspec
       </div>
       {caption && <figcaption className="mt-2" style={T.caption}>{caption}</figcaption>}
     </figure>
+  );
+}
+
+// ── iPhone frame shell ────────────────────────────────────────
+function IPhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "#0a0a0a",
+        borderRadius: "44px",
+        border: "10px solid #1c1c1e",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Dynamic island */}
+      <div
+        style={{
+          position: "absolute",
+          top: "12px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "120px",
+          height: "34px",
+          background: "#0a0a0a",
+          borderRadius: "20px",
+          zIndex: 10,
+        }}
+      />
+      <div style={{ position: "absolute", inset: 0, borderRadius: "34px", overflow: "hidden" }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── Scales a 390×844 phone to `scale`, reserving exact layout height ──
+function PhoneWrapper({ children, scale = 0.5 }: { children: React.ReactNode; scale?: number }) {
+  return (
+    <div style={{ height: `${Math.round(844 * scale)}px`, display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          width: 390,
+          height: 844,
+          transform: `scale(${scale})`,
+          transformOrigin: "top center",
+          flexShrink: 0,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ── Scroll-driven sticky phone column ────────────────────────
+function ScrollPhoneColumn({
+  phoneSections,
+}: {
+  phoneSections: Array<{ id: string; videoSrc: string | null; threshold?: number }>;
+}) {
+  const [displayedVideo, setDisplayedVideo] = useState<string | null>(
+    "/overview-video.mp4.mov"
+  );
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const sections = [
+      { id: "overview",         video: "/overview-video.mp4.mov" },
+      { id: "the-problem",      video: null },
+      { id: "research",         video: null },
+      { id: "discovery",        video: null },
+      { id: "mobile-first",     video: "/mobile-first-video.mp4.mov" },
+      { id: "design-decisions", video: null },
+      { id: "photo-gallery",    video: null },
+      { id: "user-testing",     video: null },
+      { id: "final-delivery",   video: null },
+      { id: "reflections",      video: null },
+    ];
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY + window.innerHeight * 0.3;
+      let activeVideo: string | null = null;
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (!el) continue;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        if (scrollY >= top && scrollY < bottom) {
+          activeVideo = section.video;
+          break;
+        }
+      }
+      setDisplayedVideo(activeVideo);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => { videoRef.current?.load(); }, [displayedVideo]);
+
+  const phoneVisible = displayedVideo !== null;
+
+  return (
+    <div
+      className={phoneVisible ? "hidden md:block" : "hidden"}
+      style={{
+        flexShrink: 0,
+        width:     290,
+        position:  "sticky",
+        top:       "120px",
+        alignSelf: "flex-start",
+      }}
+    >
+      <PhoneWrapper>
+        <IPhoneFrame>
+          <div style={{ width: "100%", height: "100%" }}>
+            {displayedVideo ? (
+              <video
+                ref={videoRef}
+                autoPlay loop muted playsInline
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              >
+                <source src={displayedVideo} type="video/quicktime" />
+              </video>
+            ) : (
+              <div style={{ width: "100%", height: "100%", background: "#111" }} />
+            )}
+          </div>
+        </IPhoneFrame>
+      </PhoneWrapper>
+    </div>
+  );
+}
+
+// ── Before / After phone toggle ───────────────────────────────
+function BeforeAfterToggle({
+  beforeSrc,
+  afterSrc,
+  beforeLabel,
+  afterLabel,
+}: {
+  beforeSrc?: string;
+  afterSrc?: string;
+  beforeLabel: string;
+  afterLabel: string;
+}) {
+  const [mode, setMode]     = useState<"before" | "after">("before");
+  const [fading, setFading] = useState(false);
+
+  const toggle = (next: "before" | "after") => {
+    if (next === mode) return;
+    setFading(true);
+    setTimeout(() => { setMode(next); setFading(false); }, 150);
+  };
+
+  const activeSrc = mode === "before" ? beforeSrc : afterSrc;
+
+  return (
+    <div className="mt-8 flex flex-col items-center gap-5">
+      <PhoneWrapper scale={0.6}>
+        <IPhoneFrame>
+          <div style={{ width: "100%", height: "100%", opacity: fading ? 0 : 1, transition: "opacity 0.15s ease" }}>
+            {activeSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={activeSrc}
+                alt={mode === "before" ? beforeLabel : afterLabel}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            ) : (
+              <div style={{ width: "100%", height: "100%", background: "#111" }} />
+            )}
+          </div>
+        </IPhoneFrame>
+      </PhoneWrapper>
+
+      <div style={{ display: "flex", gap: 12 }}>
+        {(["before", "after"] as const).map((m) => (
+          <button
+            key={m}
+            onClick={() => toggle(m)}
+            style={{
+              padding:    "8px 20px",
+              borderRadius: 999,
+              border:     "1.5px solid var(--ink)",
+              background: mode === m ? "var(--ink)" : "transparent",
+              color:      mode === m ? "#fff" : "var(--ink)",
+              cursor:     "pointer",
+              fontFamily: "var(--font-lato)",
+              fontSize:   14,
+              transition: "background 0.2s ease, color 0.2s ease",
+            }}
+          >
+            {m === "before" ? "Before testing" : "After testing"}
+          </button>
+        ))}
+      </div>
+
+      <p style={{ fontFamily: "var(--font-lato)", fontSize: 13, color: "var(--ink-3)", textAlign: "center" }}>
+        {mode === "before" ? beforeLabel : afterLabel}
+      </p>
+    </div>
   );
 }
 
@@ -373,7 +601,7 @@ function renderBlocks(blocks: Block[]) {
                   {card.images && (
                     <div>
                       {/* Two images side by side, natural proportions aligned at top */}
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px", alignItems: "start" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "16px", alignItems: "start" }}>
                         {card.images.map((img, ii) => (
                           <div key={ii} style={{ borderRadius: "4px", overflow: "visible" }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -419,12 +647,12 @@ function renderBlocks(blocks: Block[]) {
     // Image row (phone screens side by side, no warm bg)
     if (b.type === "image-row") {
       const outerStyle: React.CSSProperties = b.fullWidth
-        ? { display: "flex", gap: "2vw", width: "92vw", position: "relative", left: "50%", transform: "translateX(-50%)" }
-        : { display: "grid", gap: "12px", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", alignItems: "stretch" };
+        ? { display: "flex", gap: "8px", width: "92vw", position: "relative", left: "50%", transform: "translateX(-50%)" }
+        : { width: "100%", display: "grid", gap: "16px", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", alignItems: "stretch" };
       output.push(
-        <div key={i} className="mt-8" style={outerStyle}>
+        <div key={i} style={{ ...outerStyle, marginTop: "24px" }}>
           {b.images.map((img, ii) => (
-            <figure key={ii} style={b.fullWidth ? { width: "45vw", maxWidth: "none", flexShrink: 0 } : { width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
+            <figure key={ii} style={b.fullWidth ? { flex: "1 1 0", minWidth: 0 } : { width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
               {img.src ? (
                 img.aspect ? (
                   <div className="rounded-[3px] overflow-hidden" style={{ width: "100%", aspectRatio: img.aspect }}>
@@ -741,10 +969,28 @@ function renderBlocks(blocks: Block[]) {
       continue;
     }
 
+    // Before / After toggle
+    if (b.type === "before-after-toggle") {
+      output.push(
+        <BeforeAfterToggle
+          key={i}
+          beforeSrc={b.beforeSrc}
+          afterSrc={b.afterSrc}
+          beforeLabel={b.beforeLabel}
+          afterLabel={b.afterLabel}
+        />
+      );
+      i++;
+      continue;
+    }
+
     // Text blocks
     if (b.type === "paragraph") {
       output.push(
         <p key={i} style={T.body} className="mt-5">
+          {b.boldPrefix && (
+            <strong style={{ fontWeight: 700, color: "var(--ink)" }}>{b.boldPrefix}</strong>
+          )}
           {b.text}
           {b.link && (
             <> <a
@@ -757,7 +1003,7 @@ function renderBlocks(blocks: Block[]) {
         </p>
       );
     } else if (b.type === "subheading") {
-      output.push(<h3 key={i} style={T.subheading} className="mt-10 mb-1">{b.text}</h3>);
+      output.push(<h3 key={i} id={b.id} style={T.subheading} className="mt-10 mb-1">{b.text}</h3>);
     } else if (b.type === "list") {
       output.push(
         <ul key={i} className="mt-5 space-y-2.5">
@@ -858,6 +1104,26 @@ export default function WorkPage() {
   const sectionIds = caseStudy?.sections.map((s) => s.id) ?? [];
   const activeId   = useActiveSection(sectionIds);
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [tocVisible, setTocVisible] = useState(false);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          setTocVisible(entry.boundingClientRect.top < 0);
+        } else {
+          setTocVisible(false);
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   // Smooth exit animation on "back" navigation
   const handleBack = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -895,11 +1161,14 @@ export default function WorkPage() {
     );
   }
 
+  const hasScrollPhone  = !!caseStudy.scrollPhone;
+  const contentMaxWidth = hasScrollPhone ? 1100 : 960;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
     >
     <motion.div className="bg-[var(--bg)]" animate={controls}>
@@ -925,56 +1194,99 @@ export default function WorkPage() {
         </div>
       )}
 
-      {/* ── Two-column layout: sticky TOC left + content right ── */}
-      <div className="max-w-[960px] mx-auto px-6 md:px-10 flex items-start gap-12 pt-12 pb-32">
+      {/* sentinel: TOC appears when this crosses the viewport top */}
+      <div ref={heroRef} aria-hidden="true" />
 
-        <TableOfContents sections={caseStudy.sections} activeId={activeId} onBack={handleBack} />
+      {/* ── TOC + content ─────────────────────────────────────── */}
+      <div
+        className="mx-auto px-6 md:px-10 flex items-start gap-12 pt-12 pb-32"
+        style={{ maxWidth: `${contentMaxWidth}px` }}
+      >
+
+        <TableOfContents
+          sections={caseStudy.sections}
+          activeId={activeId}
+          onBack={handleBack}
+          visible={tocVisible}
+          contentMaxWidth={contentMaxWidth}
+        />
 
         <div className="flex-1 min-w-0">
+          <div className={hasScrollPhone ? "flex gap-8" : undefined}>
 
-          {/* ── Title section ──────────────────────────────── */}
-          <div className="pb-10">
+            {/* ── Main text column ───────────────────────── */}
+            <div className={hasScrollPhone ? "flex-1 min-w-0" : undefined}>
 
-            {/* Back link (mobile only) */}
-            <a
-              href="/"
-              onClick={handleBack}
-              style={{ ...T.mono, textDecoration: "none" }}
-              className="inline-flex items-center gap-2 mb-8 lg:hidden hover:text-[var(--ink-3)] transition-colors cursor-pointer"
-            >
-              ← Work
-            </a>
+              {/* ── Title section ────────────────────────── */}
+              <div className="pb-10">
+
+                {/* Back link (mobile only) */}
+                <a
+                  href="/"
+                  onClick={handleBack}
+                  style={{ ...T.mono, textDecoration: "none" }}
+                  className="inline-flex items-center gap-2 mb-8 lg:hidden hover:text-[var(--ink-3)] transition-colors cursor-pointer"
+                >
+                  ← Work
+                </a>
 
 
-            <h1 style={T.projectTitle}>{caseStudy.title}</h1>
+                <h1 style={T.projectTitle}>{caseStudy.title}</h1>
 
-            <p className="mt-2.5" style={{ ...T.body, color: "var(--ink-3)", fontSize: "18px" }}>
-              {caseStudy.subtitle}
-            </p>
+                <p className="mt-2.5" style={{ ...T.body, fontFamily: "proxima-nova, sans-serif", letterSpacing: "-0.028em", color: "var(--ink-3)", fontSize: "18px" }}>
+                  {caseStudy.subtitle}
+                </p>
 
-            <p
-              className="mt-2"
-              style={{ fontFamily: "var(--font-lato)", fontStyle: "italic", fontSize: "15px", color: "var(--ink-4)", lineHeight: 1.6 }}
-            >
-              {caseStudy.context} · {caseStudy.tools.join(", ")}
-            </p>
+                <p
+                  className="mt-2"
+                  style={{ fontFamily: "proxima-nova, sans-serif", fontStyle: "italic", fontSize: "15px", letterSpacing: "-0.028em", color: "var(--ink-4)", lineHeight: 1.6 }}
+                >
+                  {caseStudy.context} · {caseStudy.tools.join(", ")}
+                </p>
+              </div>
+
+              {/* ── Content sections ─────────────────────── */}
+              {caseStudy.sections.map((section) => {
+                const phoneEntry = caseStudy.scrollPhone?.sections.find((s) => s.id === section.id);
+                return (
+                  <section
+                    key={section.id}
+                    id={section.id}
+                    className="mt-14 pt-2"
+                    style={{ scrollMarginTop: "100px" }}
+                  >
+                    {/* Mobile-only inline phone video */}
+                    {hasScrollPhone && phoneEntry !== undefined && (
+                      <div className="md:hidden mb-8">
+                        <PhoneWrapper scale={0.5}>
+                          <IPhoneFrame>
+                            {phoneEntry.videoSrc ? (
+                              <video autoPlay loop muted playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}>
+                                <source src={phoneEntry.videoSrc} type="video/quicktime" />
+                              </video>
+                            ) : (
+                              <div style={{ width: "100%", height: "100%", background: "#111" }} />
+                            )}
+                          </IPhoneFrame>
+                        </PhoneWrapper>
+                      </div>
+                    )}
+                    <h2 style={T.sectionHeading} className="mb-6">
+                      {section.heading}
+                    </h2>
+                    {renderBlocks(section.blocks)}
+                  </section>
+                );
+              })}
+
+            </div>
+
+            {/* ── Sticky phone column (desktop only) ─────── */}
+            {hasScrollPhone && (
+              <ScrollPhoneColumn phoneSections={caseStudy.scrollPhone!.sections} />
+            )}
+
           </div>
-
-          {/* ── Content sections ───────────────────────────── */}
-          {caseStudy.sections.map((section) => (
-            <section
-              key={section.id}
-              id={section.id}
-              className="mt-14 pt-2"
-              style={{ scrollMarginTop: "100px" }}
-            >
-              <h2 style={T.sectionHeading} className="mb-6">
-                {section.heading}
-              </h2>
-              {renderBlocks(section.blocks)}
-            </section>
-          ))}
-
         </div>
       </div>
 

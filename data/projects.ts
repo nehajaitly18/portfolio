@@ -36,6 +36,7 @@ export const projects: Project[] = [
     tags: ["Editorial", "Typography", "Print"],
     href: "/work/elvis-presley",
     thumbClass: "project-thumb-2",
+    image: "/spread 3.png",
     featured: true,
   },
   {
@@ -48,6 +49,7 @@ export const projects: Project[] = [
     tags: ["Fintech", "UX Research", "Systems"],
     href: "/work/micro-merchant-loan",
     thumbClass: "project-thumb-3",
+    image: "/wireframes.png",
   },
   {
     id: "penny-stamps",
@@ -59,7 +61,7 @@ export const projects: Project[] = [
     tags: ["Wayfinding", "Branding", "Signage"],
     href: "/work/penny-stamps",
     thumbClass: "project-thumb-4",
-    image: "/2.png",
+    image: "/wayfinding cover.png",
   },
   {
     id: "la-raza",
@@ -71,6 +73,7 @@ export const projects: Project[] = [
     tags: ["Zine", "Exhibition", "Print"],
     href: "/work/la-raza",
     thumbClass: "project-thumb-5",
+    image: "/zine cover image-1.png",
   },
   {
     id: "michigan-arts",
@@ -82,5 +85,6 @@ export const projects: Project[] = [
     tags: ["Poster", "Typography", "Campaign"],
     href: "/work/michigan-arts",
     thumbClass: "project-thumb-6",
+    image: "/poster cover.png",
   },
 ];

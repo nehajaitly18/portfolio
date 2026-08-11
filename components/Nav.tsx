@@ -24,12 +24,12 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={cn(
-        "text-[13px] tracking-wide relative group transition-colors duration-200",
+        "text-[13px] tracking-normal relative group transition-colors duration-200",
         active
           ? "text-[var(--ink)]"
           : "text-[var(--ink-3)] hover:text-[var(--ink)]"
       )}
-      style={{ fontFamily: 'var(--font-atma)', fontWeight: 400, fontSize: '16px' }}
+      style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '15px' }}
     >
       {children}
       <span
@@ -153,8 +153,8 @@ export default function Nav() {
             href="https://drive.google.com/your-resume-link"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[13px] tracking-wide relative group transition-colors duration-200 text-[var(--ink-3)] hover:text-[var(--ink)]"
-            style={{ fontFamily: 'var(--font-atma)', fontWeight: 400, fontSize: '16px' }}
+            className="text-[13px] tracking-normal relative group transition-colors duration-200 text-[var(--ink-3)] hover:text-[var(--ink)]"
+            style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '15px' }}
           >
             Resume
             <span className="absolute -bottom-0.5 left-0 h-px bg-[var(--ink)] transition-all duration-300 w-0 group-hover:w-full" />

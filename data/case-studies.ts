@@ -1,6 +1,6 @@
 export type Block =
-  | { type: "paragraph"; text: string; link?: { label: string; href: string } }
-  | { type: "subheading"; text: string }
+  | { type: "paragraph"; text: string; link?: { label: string; href: string }; boldPrefix?: string }
+  | { type: "subheading"; text: string; id?: string }
   | { type: "finding"; title: string; body: string; bg?: string; num?: string; reasoning?: string; logoSrc?: string; borderColor?: string }
   | { type: "list"; items: string[] }
   | { type: "quote"; text: string; attribution: string }
@@ -15,7 +15,8 @@ export type Block =
   | { type: "video-row"; videos: { label: string; caption?: string; src?: string; phoneFrame?: boolean }[]; aspect?: string }
   | { type: "youtube-comments"; label?: string; comments: { username: string; text: string; likes: number; translation?: "see-original" | "translate" }[] }
   | { type: "external-link"; label: string; href: string }
-  | { type: "carousel"; images: { src: string; alt: string }[] };
+  | { type: "carousel"; images: { src: string; alt: string }[] }
+  | { type: "before-after-toggle"; beforeSrc?: string; afterSrc?: string; beforeLabel: string; afterLabel: string };
 
 export interface TocSection {
   id: string;
@@ -52,6 +53,20 @@ const midorm: CaseStudy = {
     aspect: "16/9",
     src: "/gen.png",
   },
+  scrollPhone: {
+    sections: [
+      { id: "overview",         videoSrc: "/overview-video.mp4.mov" },
+      { id: "the-problem",      videoSrc: null },
+      { id: "research",         videoSrc: null },
+      { id: "discovery",        videoSrc: null },
+      { id: "mobile-first",     videoSrc: "/mobile-first-video.mp4.mov" },
+      { id: "design-decisions", videoSrc: null },
+      { id: "photo-gallery",    videoSrc: null },
+      { id: "user-testing",     videoSrc: null },
+      { id: "final-delivery",   videoSrc: null },
+      { id: "reflections",      videoSrc: null },
+    ],
+  },
   sections: [
     {
       id: "overview",
@@ -64,15 +79,8 @@ const midorm: CaseStudy = {
         },
         {
           type: "paragraph",
-          text: "MiDorm simplifies this by organizing key information and creating an easy way to explore and compare options to help students make informed decisions.",
-        },
-        {
-          type: "image-row",
-          images: [
-            { label: "Browse & Filter", aspect: "9/19", src: "/overview%201.png" },
-            { label: "Dorm Filters", aspect: "9/19", src: "/images/overview%202.png" },
-            { label: "Dorm Detail", aspect: "9/19", src: "/overview%203.png" },
-          ],
+          boldPrefix: "MiDorm",
+          text: " simplifies this by organizing key information and creating an easy way to explore and compare options to help students make informed decisions.",
         },
       ],
     },
@@ -162,10 +170,13 @@ const midorm: CaseStudy = {
           type: "callout",
           text: "Visual details are the most engaging and useful to students. This led us to adopt a photo-first design for dorm detail screens.",
         },
-        {
-          type: "subheading",
-          text: "Mobile First + Design System",
-        },
+      ],
+    },
+    {
+      id: "mobile-first",
+      label: "Mobile First",
+      heading: "Mobile First + Design System",
+      blocks: [
         {
           type: "paragraph",
           text: "We followed a Mobile First approach and aligned with Apple's iOS Human Interface Guidelines, and created a design system to streamline our process.",
@@ -190,38 +201,18 @@ const midorm: CaseStudy = {
           text: "We progressed major app screens from sketches to high-fidelity prototyped wireframes.",
         },
         {
-          type: "media-row",
-          aspect: "9/19.5",
-          items: [
-            { kind: "image", label: "Hi-fi — Browse & Filter", src: "/11.png" },
-            { kind: "image", label: "Hi-fi — Dorm Selection", src: "/Screenshot%202026-03-02%20at%203.15.06%20PM.png" },
-            { kind: "image", label: "Hi-fi — Roommates", src: "/Screenshot%202026-03-02%20at%203.14.41%20PM.png" },
-            { kind: "video", label: "App flow", src: "/video flow.mov" },
-          ],
-        },
-        {
           type: "subheading",
           text: "Photo Gallery",
+          id: "photo-gallery",
         },
         {
           type: "paragraph",
           text: "Increasing visual transparency by placing a photo gallery at the top of each dorm page, featuring student-submitted images of real rooms and spaces help students make more informed decisions.",
         },
         {
-          type: "image",
-          label: "Photo gallery screen — dorm detail view",
-          aspect: "9/19.5",
-          cols: 2,
-        },
-        {
-          type: "image",
-          label: "Photo gallery screen — alternate view",
-          aspect: "9/19.5",
-          cols: 2,
-        },
-        {
           type: "subheading",
           text: "User Testing Insights",
+          id: "user-testing",
         },
         {
           type: "paragraph",
@@ -249,12 +240,11 @@ const midorm: CaseStudy = {
           ],
         },
         {
-          type: "carousel",
-          images: [
-            { src: "/revision 1.png", alt: "Revision 1" },
-            { src: "/revision 2.png", alt: "Revision 2" },
-            { src: "/revision 3.png", alt: "Revision 3" },
-          ],
+          type: "before-after-toggle",
+          beforeSrc: "/revision-before.png",
+          afterSrc: "/revision-after.png",
+          beforeLabel: "Original design before user testing",
+          afterLabel: "Revised design after user testing",
         },
       ],
     },
@@ -437,18 +427,21 @@ const microMerchantLoan: CaseStudy = {
           title: "BharatPay",
           body: "Quick onboarding, minimal docs, transaction-based approvals optimised for Tier 2/3 users.",
           logoSrc: "https://www.google.com/s2/favicons?domain=bharatpe.com&sz=32",
+          borderColor: "#5A8FA8",
         },
         {
           type: "finding",
           title: "CRED",
           body: "Animations and gamified feedback make financial actions feel light and premium.",
           logoSrc: "https://www.google.com/s2/favicons?domain=cred.club&sz=32",
+          borderColor: "#5A8FA8",
         },
         {
           type: "finding",
           title: "PhonePe",
           body: "Clean UI with merchant dashboard and multilingual support. Loans tied to transaction history.",
           logoSrc: "https://www.google.com/s2/favicons?domain=phonepe.com&sz=32",
+          borderColor: "#5A8FA8",
         },
         {
           type: "subheading",
@@ -557,16 +550,19 @@ const microMerchantLoan: CaseStudy = {
           type: "finding",
           title: "Design is about legibility, not just functionality",
           body: "This project showed me that clarity builds trust and that even small decisions, from language to information order, can determine whether a user moves forward or drops off.",
+          borderColor: "#5A8FA8",
         },
         {
           type: "finding",
           title: "Research methods should match your users",
           body: "YouTube comment sections gave me access to real merchants describing confusion in their own words.",
+          borderColor: "#5A8FA8",
         },
         {
           type: "finding",
           title: "Data over assumptions",
           body: "Using merchant help desk data to build the FAQ made decisions easier to defend and the design immediately more credible.",
+          borderColor: "#5A8FA8",
         },
         {
           type: "subheading",
@@ -576,11 +572,13 @@ const microMerchantLoan: CaseStudy = {
           type: "finding",
           title: "Multilingual onboarding",
           body: "[SECTION PLACEHOLDER - add multilingual onboarding description here]",
+          borderColor: "#5A8FA8",
         },
         {
           type: "finding",
           title: "In-context usability testing",
           body: "In-person testing with real Tier 2/3 merchants on their own devices — to see where attention falls and where it drops in real conditions.",
+          borderColor: "#5A8FA8",
         },
       ],
     },

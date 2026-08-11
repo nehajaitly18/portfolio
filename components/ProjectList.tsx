@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, useInView } from "framer-motion";
 import { projects } from "@/data/projects";
 
-const IMAGE_HEIGHTS = [420, 320, 370, 400];
+const EXPO = [0.16, 1, 0.3, 1] as const;
 
 function ProjectCard({
   project,
@@ -20,8 +20,6 @@ function ProjectCard({
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const router = useRouter();
 
-  const imageHeight = IMAGE_HEIGHTS[index % IMAGE_HEIGHTS.length];
-
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     router.push(project.href);
@@ -30,12 +28,12 @@ function ProjectCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 0 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
         delay: (index % 2) * 0.08,
         duration: 0.7,
-        ease: [0.16, 1, 0.3, 1],
+        ease: EXPO,
       }}
     >
       <Link
@@ -44,78 +42,68 @@ function ProjectCard({
         data-cursor-label={project.category}
         onClick={handleClick}
       >
-        {/* Image */}
-        <div
-          className="relative overflow-hidden mb-3"
-          style={{ height: `${imageHeight}px`, borderRadius: "12px", width: "100%" }}
-        >
-          {project.image ? (
-            <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" style={{ width: "100%", height: "100%" }}>
-              <Image
+        {/* Thumbnail — natural aspect ratio, rounded, full column width */}
+        {project.image && (
+          <div style={{ overflow: "hidden", borderRadius: "14px" }}>
+            <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={project.image}
                 alt={project.title}
-                fill
-                style={{ objectFit: "cover", objectPosition: "center" }}
-                sizes="(max-width: 640px) 100vw, 50vw"
+                style={{ width: "100%", height: "auto", display: "block" }}
               />
             </div>
-          ) : (
-            <div
-              className={`absolute inset-0 ${project.thumbClass} transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]`}
-            />
-          )}
+          </div>
+        )}
+
+        {/* Meta: name left · category · year right */}
+        <div
+          style={{
+            display:        "flex",
+            alignItems:     "baseline",
+            justifyContent: "space-between",
+            gap:            "16px",
+            marginTop:      "12px",
+          }}
+        >
+          <span
+            className="transition-opacity duration-300 group-hover:opacity-50"
+            style={{
+              fontFamily: (project.id === "midorm" || project.id === "elvis-presley") ? "Georgia, serif" : "var(--font-playfair)",
+              fontSize:   "24px",
+              fontWeight: 500,
+              lineHeight: 1.3,
+              color:      "var(--ink)",
+            }}
+          >
+            {project.title}
+          </span>
+
+          <span
+            style={{
+              fontFamily:  "proxima-nova, sans-serif",
+              fontSize:    "15px",
+              fontWeight:  300,
+              color:       "var(--ink-3)",
+              letterSpacing: "-0.028em",
+              whiteSpace:  "nowrap",
+            }}
+          >
+            {project.category}&nbsp;&middot;&nbsp;{project.year}
+          </span>
         </div>
-
-        {/* Title */}
-        <h3
-          className="text-[var(--ink)] mb-1.5 transition-opacity duration-300 group-hover:opacity-60"
-          style={{
-            fontFamily: "var(--font-playfair)",
-            fontSize: "22px",
-            fontWeight: 500,
-            lineHeight: 1.2,
-          }}
-        >
-          {project.title}
-        </h3>
-
-        {/* Category */}
-        <span
-          className="text-[var(--ink-3)]"
-          style={{
-            fontFamily: "var(--font-lato)",
-            fontSize: "16px",
-            fontWeight: 300,
-          }}
-        >
-          {project.category}
-        </span>
       </Link>
     </motion.div>
   );
 }
 
 export default function ProjectList() {
-  const ruleRef = useRef<HTMLDivElement>(null);
-  const ruleInView = useInView(ruleRef, { once: true, margin: "-40px" });
-
   return (
-    <section id="projects">
-      <div className="px-6 md:px-12 max-w-[1200px] mx-auto py-16 md:py-24">
+    <section id="projects" style={{ background: "var(--bg)" }}>
+      <div className="px-4 md:px-8 lg:px-10 max-w-[1200px] mx-auto pt-8 pb-16 md:pt-10 md:pb-20">
 
-        {/* Editorial section rule */}
-        <div ref={ruleRef} className="mb-10 md:mb-14">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={ruleInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ transformOrigin: "left" }}
-            className="h-px bg-[var(--border-strong)] w-full mb-4"
-          />
-        </div>
-
-        {/* 2-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-10">
+        {/* 2-column grid with generous row spacing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 md:gap-x-6 gap-y-16 md:gap-y-20">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
