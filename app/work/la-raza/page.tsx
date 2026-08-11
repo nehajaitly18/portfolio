@@ -8,7 +8,7 @@ import { motion, useAnimation, useInView } from "framer-motion";
 const CAROUSEL_IMAGES = [
   "/zine front loop.png",
   "/zine loop 1.jpg",
-  "/zine loop 2.jpg",
+  "/loop 2.webp",
   "/zine loop 3.jpg",
   "/zine loop 4 .png",
   "/zine loop 5.png",
@@ -17,7 +17,7 @@ const CAROUSEL_IMAGES = [
 
 const SPREAD_IMAGES = [
   "/zine loop 1.jpg",
-  "/zine loop 2.jpg",
+  "/loop 2.webp",
   "/zine loop 3.jpg",
   "/zine loop 4 .png",
   "/zine loop 5.png",
