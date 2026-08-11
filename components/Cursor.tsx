@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
-  const [label, setLabel] = useState<string | null>(null);
+  const [label, setLabel]     = useState<string | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const dot = dotRef.current;
@@ -19,6 +20,7 @@ export default function Cursor() {
       dot.style.top = y;
       pill.style.left = x;
       pill.style.top = y;
+      setVisible(true);
     };
 
     const onEnter = (e: Event) => {
@@ -58,12 +60,13 @@ export default function Cursor() {
       {/* Default dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        className="fixed pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        style={{ top: "-200px", left: "-200px" }}
       >
         <div
           className="w-2.5 h-2.5 rounded-full bg-[#111110] transition-all duration-200"
           style={{
-            opacity: hasLabel ? 0 : 1,
+            opacity: !visible || hasLabel ? 0 : 1,
             transform: hasLabel ? "scale(0)" : "scale(1)",
           }}
         />
@@ -72,7 +75,8 @@ export default function Cursor() {
       {/* Label pill */}
       <div
         ref={pillRef}
-        className="fixed top-0 left-0 pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        className="fixed pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        style={{ top: "-200px", left: "-200px" }}
       >
         <div
           className="flex items-center justify-center px-4 h-8 rounded-full bg-[#111110] whitespace-nowrap transition-all duration-250"
@@ -82,7 +86,7 @@ export default function Cursor() {
             transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
-          <span className="text-white text-[12px] font-medium tracking-widest uppercase" style={{ fontFamily: "var(--font-atma)" }}>
+          <span className="text-white text-[12px] font-medium tracking-[0.06em]" style={{ fontFamily: "var(--font-lato)" }}>
             {label ?? ""}
           </span>
         </div>

@@ -308,7 +308,7 @@ const midorm: CaseStudy = {
 const microMerchantLoan: CaseStudy = {
   id: "micro-merchant-loan",
   title: "Micro Merchant Loan",
-  subtitle: "Fintech platforms in India design loan products for larger amounts and longer repayment cycles. Paytm's merchants needed something different.",
+  subtitle: "",
   context: "UX / UI Internship · Paytm",
   category: "UX / UI Design",
   year: "2025",

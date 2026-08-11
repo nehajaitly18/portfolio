@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, Playfair_Display, Lato, Atma } from "next/font/google";
+import { Inter, Instrument_Serif, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -28,17 +28,6 @@ const playfairDisplay = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-const lato = Lato({
-  variable: "--font-lato",
-  subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
-});
-
-const atma = Atma({
-  variable: "--font-atma",
-  subsets: ["latin"],
-  weight: ["300", "400", "600"],
-});
 
 export const metadata: Metadata = {
   title: "Neha Jaitly — Visual Designer",
@@ -60,17 +49,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrumentSerif.variable} ${playfairDisplay.variable} ${lato.variable} ${atma.variable}`}
+      className={`${inter.variable} ${instrumentSerif.variable} ${playfairDisplay.variable}`}
     >
       <head>
-        <link rel="stylesheet" href="https://use.typekit.net/wue2wvd.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/zsw4dlb.css" />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--bg)]">
         <PageTransitionOverlay />
         <Cursor />
         <ScrollProgress />
         <Nav />
-        <main className="flex-1 pt-16">
+        <main className="flex-1 pt-14 md:pt-16">
           <PageTransitionWrapper>{children}</PageTransitionWrapper>
         </main>
         <Footer />

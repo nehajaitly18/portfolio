@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import BackButton from "@/components/BackButton";
 
 // ── Crossfade carousel ────────────────────────────────────────
 const LOOP_IMAGES = [
@@ -58,8 +59,8 @@ const T = {
     fontFamily:    "Georgia, serif",
     fontStyle:     "normal",
     fontWeight:    400,
-    fontSize:      "clamp(16px, 2.5vw, 26px)",
-    lineHeight:    1.06,
+    fontSize:      "clamp(1.5rem, 3vw, 2.25rem)",
+    lineHeight:    1.15,
     letterSpacing: "-0.02em",
     color:         "var(--ink)",
   } as React.CSSProperties,
@@ -86,16 +87,19 @@ export default function ElvisPresleyPage() {
       y: 10,
       transition: { duration: 0.32, ease: [0.76, 0, 0.24, 1] },
     });
-    router.push("/#projects");
+    router.push("/#work");
   };
 
   return (
-    <motion.div className="bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+    <>
+    <style>{`@media (max-width: 767px) { .elvis-page { margin-top: -56px !important; } }`}</style>
+    <motion.div className="elvis-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+      <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/hero.png"
+        src="/intro page.png"
         alt="Through the Cover — hero"
         style={{
           display:  "block",
@@ -107,7 +111,7 @@ export default function ElvisPresleyPage() {
       />
 
       {/* ── 2. Title + Text Section ───────────────────────────── */}
-      <div className="max-w-[960px] mx-auto px-6 md:px-10 pt-16 pb-16">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-16">
 
         <h1 style={{ ...T.projectTitle, marginBottom: "10px" }}>
           Elvis Presley&rsquo;s Albums and the Stories They Told
@@ -115,29 +119,30 @@ export default function ElvisPresleyPage() {
 
         <p
           style={{
-            fontFamily:    '"proxima-nova", sans-serif',
+            fontFamily:    "var(--font-lato)",
+            fontStyle:     "italic",
             fontWeight:    400,
-            fontSize:      "13px",
-            lineHeight:    1.4,
-            letterSpacing: "0.04em",
-            color:         "var(--ink-3)",
+            fontSize:      "15px",
+            lineHeight:    1.6,
+            letterSpacing: "-0.028em",
+            color:         "var(--ink-4)",
             marginBottom:  "48px",
           }}
         >
           2025 &middot; Publication &middot; Adobe InDesign
         </p>
 
-        <div style={{ display: "flex", gap: "64px", alignItems: "flex-start" }}>
+        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-16">
 
           {/* Left: section heading */}
-          <div style={{ flexShrink: 0, width: "200px" }}>
+          <div className="md:shrink-0 md:w-[200px]">
             <h2
               style={{
                 fontFamily:    "Georgia, serif",
                 fontWeight:    400,
-                fontSize:      "24px",
-                lineHeight:    1.3,
-                letterSpacing: "-0.01em",
+                fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
+                lineHeight:    1.1,
+                letterSpacing: "-0.02em",
                 color:         "var(--ink)",
               }}
             >
@@ -148,22 +153,9 @@ export default function ElvisPresleyPage() {
           {/* Right: body paragraphs */}
           <div style={{ flex: 1 }}>
             <p style={T.body}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Through the Cover is an editorial book exploring Elvis Presley&rsquo;s 1970s albums as a cultural time capsule. Organized into four thematic chapters — Cinema and Song, Rock &apos;n&apos; Roll, Pop Appeal, and Glamour of the Disco. The book pairs his albums with the cultural moments they reflected, treating his music and image as a visual record of the decade.
             </p>
 
-            <p style={{ ...T.body, marginTop: "24px" }}>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit.
-            </p>
-
-            <p style={{ ...T.body, marginTop: "24px" }}>
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-              consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam
-              est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-            </p>
           </div>
 
         </div>
@@ -173,7 +165,7 @@ export default function ElvisPresleyPage() {
       <div style={{ display: "flex", width: "100%", maxWidth: "100vw", gap: "24px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/comeback.png"
+          src="/loop 2.png"
           alt="Publication spread 1"
           style={{
             display:    "block",
@@ -184,7 +176,7 @@ export default function ElvisPresleyPage() {
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/spread 2.png"
+          src="/elvis disco gallery.jpg"
           alt="Publication spread 2"
           style={{
             display:    "block",
@@ -196,81 +188,39 @@ export default function ElvisPresleyPage() {
       </div>
 
       {/* ── 4. Second Text Section ───────────────────────────── */}
-      <div className="max-w-[960px] mx-auto px-6 md:px-10 pt-16 pb-8">
-        <div style={{ display: "flex", gap: "64px", alignItems: "flex-start" }}>
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-8">
+        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-16">
 
-          <div style={{ flexShrink: 0, width: "200px" }}>
+          <div className="md:shrink-0 md:w-[200px]">
             <h2
               style={{
                 fontFamily:    "Georgia, serif",
                 fontWeight:    400,
-                fontSize:      "24px",
-                lineHeight:    1.3,
-                letterSpacing: "-0.01em",
+                fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
+                lineHeight:    1.1,
+                letterSpacing: "-0.02em",
                 color:         "var(--ink)",
               }}
             >
-              Section Heading
+              The Story
             </h2>
           </div>
 
           <div style={{ flex: 1 }}>
             <p style={T.body}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-
-            <p style={{ ...T.body, marginTop: "24px" }}>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
+              The project asks a simple question: what can an album cover tell us about the moment it was made in? Each chapter pairs select Elvis albums with the cultural currents of the time — from his rock &apos;n&apos; roll rebellion to his global reach with Aloha from Hawaii. In the disco chapter, for instance, the book connects his glam stage looks to the era&rsquo;s culture of spectacle and escapism. Across the book, each album becomes less a catalog entry and more a marker of what was happening in Elvis&rsquo;s life and the world around him.
             </p>
           </div>
 
         </div>
       </div>
 
-      {/* ── 5. Loop — 50/50 full-bleed split ─────────────────── */}
-      <div
-        style={{
-          display:             "grid",
-          gridTemplateColumns: "50vw 50vw",
-          width:               "100vw",
-          minHeight:           "600px",
-        }}
-      >
-        {/* Left: crossfade carousel */}
-        <div style={{ width: "100%", overflow: "hidden" }}>
-          <CrossfadeCarousel />
-        </div>
-
-        {/* Right: placeholder on clean white */}
-        <div
-          style={{
-            background:     "#FFFFFF",
-            display:        "flex",
-            flexDirection:  "column",
-            justifyContent: "center",
-            padding:        "64px 48px",
-          }}
-        >
-          <p
-            style={{
-              fontFamily:    "var(--font-geist-mono)",
-              fontSize:      "11px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color:         "var(--ink-4)",
-              marginBottom:  "24px",
-            }}
-          >
-            Publication Details
-          </p>
-          <p style={T.body}>Placeholder content goes here.</p>
-        </div>
+      {/* ── 5. Loop — full-bleed carousel ────────────────────── */}
+      <div style={{ width: "100vw", minHeight: "600px", overflow: "hidden" }}>
+        <CrossfadeCarousel />
       </div>
 
     </motion.div>
+    </>
   );
 }

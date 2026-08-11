@@ -23,6 +23,9 @@
     --border:        #E3E2DE;
     --border-strong: #C8C7C2;
 
+    /* ── Fonts ────────────────────────────────────────────── */
+    --font-lato: lato, sans-serif;
+
     /* ── Easing ───────────────────────────────────────────── */
     --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
     --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);

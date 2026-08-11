@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, useInView } from "framer-motion";
 import { projects } from "@/data/projects";
@@ -42,55 +41,51 @@ function ProjectCard({
         data-cursor-label={project.category}
         onClick={handleClick}
       >
-        {/* Thumbnail — natural aspect ratio, rounded, full column width */}
+        {/* Thumbnail — full column width, no crop, no rounded corners */}
         {project.image && (
-          <div style={{ overflow: "hidden", borderRadius: "14px" }}>
-            <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={project.image}
-                alt={project.title}
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-            </div>
+          <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={project.image}
+              alt={project.title}
+              style={{
+                width:      "100%",
+                height:     "auto",
+                display:    "block",
+                objectFit:  "contain",
+                borderRadius: 0,
+              }}
+            />
           </div>
         )}
 
-        {/* Meta: name left · category · year right */}
-        <div
-          style={{
-            display:        "flex",
-            alignItems:     "baseline",
-            justifyContent: "space-between",
-            gap:            "16px",
-            marginTop:      "12px",
-          }}
-        >
-          <span
+        {/* Meta: name on first line, category · year on second line */}
+        <div style={{ marginTop: "12px" }}>
+          <div
             className="transition-opacity duration-300 group-hover:opacity-50"
             style={{
-              fontFamily: (project.id === "midorm" || project.id === "elvis-presley") ? "Georgia, serif" : "var(--font-playfair)",
-              fontSize:   "24px",
+              fontFamily: "Georgia, serif",
+              fontSize:   "clamp(18px, 2.5vw, 24px)",
               fontWeight: 500,
               lineHeight: 1.3,
               color:      "var(--ink)",
             }}
           >
             {project.title}
-          </span>
+          </div>
 
-          <span
+          <div
             style={{
-              fontFamily:  "proxima-nova, sans-serif",
-              fontSize:    "15px",
-              fontWeight:  300,
-              color:       "var(--ink-3)",
-              letterSpacing: "-0.028em",
-              whiteSpace:  "nowrap",
+              fontFamily:    "var(--font-lato)",
+              fontSize:      "clamp(13px, 1.5vw, 17px)",
+              fontWeight:    300,
+              color:         "var(--ink-3)",
+              letterSpacing: "0.01em",
+              marginTop:     "4px",
             }}
           >
             {project.category}&nbsp;&middot;&nbsp;{project.year}
-          </span>
+          </div>
         </div>
       </Link>
     </motion.div>
@@ -99,11 +94,11 @@ function ProjectCard({
 
 export default function ProjectList() {
   return (
-    <section id="projects" style={{ background: "var(--bg)" }}>
-      <div className="px-4 md:px-8 lg:px-10 max-w-[1200px] mx-auto pt-8 pb-16 md:pt-10 md:pb-20">
+    <section id="work" style={{ background: "var(--bg)" }}>
+      <div className="px-10 lg:px-14 pt-2 pb-16 md:pt-4 md:pb-20">
 
-        {/* 2-column grid with generous row spacing */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 md:gap-x-6 gap-y-16 md:gap-y-20">
+        {/* 2-column grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-10 gap-y-16 md:gap-y-20">
           {projects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}

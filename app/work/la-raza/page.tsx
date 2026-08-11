@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import BackButton from "@/components/BackButton";
 
 // ── Spread images ─────────────────────────────────────────────
 const CAROUSEL_IMAGES = [
@@ -189,16 +190,19 @@ export default function LaRazaPage() {
       y: 10,
       transition: { duration: 0.32, ease: [0.76, 0, 0.24, 1] },
     });
-    router.push("/#projects");
+    router.push("/#work");
   };
 
   return (
-    <motion.div className="bg-[#111110]" animate={controls} style={{ marginTop: "-64px" }}>
+    <>
+    <style>{`@media (max-width: 767px) { .la-raza-page { margin-top: -56px !important; } }`}</style>
+    <motion.div className="la-raza-page bg-[#111110]" animate={controls} style={{ marginTop: "-64px" }}>
+      <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/zine front + spread.png"
+        src="/zine front %2B spread.png"
         alt="ABC's of Chicano Movement — hero"
         style={{
           display:    "block",
@@ -228,7 +232,7 @@ export default function LaRazaPage() {
 
           {/* Subtitle */}
           <p style={{
-            fontFamily:    "proxima-nova, sans-serif",
+            fontFamily:    "var(--font-lato)",
             fontStyle:     "italic",
             fontSize:      "15px",
             fontWeight:    400,
@@ -276,10 +280,12 @@ export default function LaRazaPage() {
 
       {/* ── 4. Looping Crossfade Section ─────────────────────── */}
       <div
+        className="px-6 md:px-[120px]"
         style={{
-          background: "#111110",
-          width:      "100%",
-          padding:    "48px 120px 96px",
+          background:    "#111110",
+          width:         "100%",
+          paddingTop:    "48px",
+          paddingBottom: "96px",
         }}
       >
         <div style={{ maxWidth: "560px", margin: "0 auto" }}>
@@ -291,7 +297,15 @@ export default function LaRazaPage() {
       <FontReveal />
 
       {/* ── 5. All Spreads — horizontal gallery strip ─────────── */}
+      <style>{`
+        @media (max-width: 430px) {
+          .spreads-strip { padding-top: 20px !important; padding-bottom: 20px !important; }
+          .spreads-inner { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px !important; flex-direction: unset !important; }
+          .spreads-inner img { flex: unset !important; width: 100% !important; min-width: unset !important; }
+        }
+      `}</style>
       <div
+        className="spreads-strip"
         style={{
           background:    "#111110",
           width:         "100%",
@@ -303,10 +317,10 @@ export default function LaRazaPage() {
         }}
       >
         <div
+          className="spreads-inner px-6 md:px-12"
           style={{
             display: "flex",
             gap:     "8px",
-            padding: "0 48px",
             width:   "100%",
           }}
         >
@@ -333,5 +347,6 @@ export default function LaRazaPage() {
       <div style={{ background: "#111110", height: "96px" }} />
 
     </motion.div>
+    </>
   );
 }

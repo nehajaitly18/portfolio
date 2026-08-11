@@ -23,7 +23,7 @@ export const projects: Project[] = [
     tags: ["iOS", "UX Research", "Prototyping"],
     href: "/work/midorm",
     thumbClass: "project-thumb-1",
-    image: "/midorm%20hero.png",
+    image: "/001.jpg",
     featured: true,
   },
   {
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     tags: ["Editorial", "Typography", "Print"],
     href: "/work/elvis-presley",
     thumbClass: "project-thumb-2",
-    image: "/spread 3.png",
+    image: "/elvis blue.png",
     featured: true,
   },
   {

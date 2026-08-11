@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
+import BackButton from "@/components/BackButton";
 
 const T = {
   body: {
@@ -89,11 +90,14 @@ export default function PennyStampsPage() {
       y: 10,
       transition: { duration: 0.32, ease: [0.76, 0, 0.24, 1] },
     });
-    router.push("/#projects");
+    router.push("/#work");
   };
 
   return (
-    <motion.div className="bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+    <>
+    <style>{`@media (max-width: 767px) { .penny-page { margin-top: -56px !important; } }`}</style>
+    <motion.div className="penny-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+      <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -140,11 +144,11 @@ export default function PennyStampsPage() {
           letterSpacing: "-0.02em",
           color:         "var(--ink)",
         }}>
-          Stamps Wayfinding
+          Penny W. Stamps Wayfinding
         </h1>
 
         <p style={{
-          fontFamily:    "proxima-nova, sans-serif",
+          fontFamily:    "var(--font-lato)",
           fontStyle:     "italic",
           fontSize:      "15px",
           fontWeight:    400,
@@ -183,7 +187,7 @@ export default function PennyStampsPage() {
           </div>
 
           {/* Right: 3 images */}
-          <div className="flex gap-2 md:gap-3 flex-1 min-w-0 w-full">
+          <div className="grid grid-cols-3 gap-2 md:gap-3 w-full md:flex-1">
             {[
               { src: "/way 1.jpg",   alt: "Existing signage 1" },
               { src: "/way 2.png",   alt: "Existing signage 2" },
@@ -194,10 +198,9 @@ export default function PennyStampsPage() {
                 key={src}
                 src={src}
                 alt={alt}
-                className="flex-1 min-w-0"
+                className="w-full"
                 style={{
-                  width:           0,
-                  height:          "240px",
+                  height:          "clamp(120px, 20vw, 240px)",
                   objectFit:       "cover",
                   objectPosition:  "top",
                   display:         "block",
@@ -389,5 +392,6 @@ export default function PennyStampsPage() {
       </div>
 
     </motion.div>
+    </>
   );
 }

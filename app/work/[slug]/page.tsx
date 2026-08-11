@@ -8,6 +8,7 @@ import Image from "next/image";
 import { projects } from "@/data/projects";
 import { caseStudies, type Block, type TocSection } from "@/data/case-studies";
 import { ImageLightbox } from "./ImageLightbox";
+import BackButton from "@/components/BackButton";
 
 const SMOOTH = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -17,14 +18,14 @@ const T = {
     fontFamily:    "Georgia, serif",
     fontStyle:     "normal",
     fontWeight:    400,
-    fontSize:      "clamp(1.5rem, 4vw, 2.5rem)",
-    lineHeight:    1.06,
+    fontSize:      "clamp(1.5rem, 3vw, 2.25rem)",
+    lineHeight:    1.15,
     letterSpacing: "-0.02em",
     color:         "var(--ink)",
   } as React.CSSProperties,
 
   sectionHeading: {
-    fontFamily:    "var(--font-playfair)",
+    fontFamily:    "Georgia, serif",
     fontStyle:     "normal",
     fontWeight:    400,
     fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
@@ -128,7 +129,7 @@ function TableOfContents({
           href="/"
           onClick={onBack}
           style={{ ...T.mono, fontFamily: "var(--font-lato)", fontSize: "15px", opacity: 0.38, display: "inline-block", cursor: "pointer", textDecoration: "none" }}
-          className="hover:opacity-70 transition-opacity duration-200"
+          className="hover:!opacity-100 hover:text-[var(--ink)] transition-all duration-200"
         >
           ← Work
         </a>
@@ -158,11 +159,8 @@ function TableOfContents({
                   }}
                 />
                 <span
-                  className="text-[15px] leading-snug transition-colors duration-200 group-hover:text-[var(--ink-2)]"
-                  style={{
-                    fontFamily: "var(--font-lato)",
-                    color:      isActive ? "var(--ink)" : "var(--ink-4)",
-                  }}
+                  className={`text-[15px] leading-snug transition-colors duration-200 hover:text-[var(--ink)] ${isActive ? "text-[var(--ink)]" : "text-[var(--ink-4)]"}`}
+                  style={{ fontFamily: "var(--font-lato)" }}
                 >
                   {s.label}
                 </span>
@@ -494,58 +492,20 @@ function renderBlocks(blocks: Block[]) {
   while (i < blocks.length) {
     const b = blocks[i];
 
-    // YouTube comment cards
+    // YouTube comments — replaced with image
     if (b.type === "youtube-comments") {
-      const rotations = ["-0.8deg", "0.6deg", "-0.5deg", "0.9deg"];
       output.push(
-        <div key={i} className="mt-8">
-          {b.label && (
-            <p style={{ fontFamily: "var(--font-lato)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }} className="mb-4">
-              {b.label}
-            </p>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {b.comments.map((c, ci) => (
-              <div
-                key={ci}
-                style={{
-                  background:   "#fff",
-                  border:       "1px solid #e0e0e0",
-                  borderRadius: "8px",
-                  padding:      "12px 16px",
-                  transform:    `rotate(${rotations[ci % rotations.length]})`,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                  <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#ccc", flexShrink: 0 }} />
-                  <span style={{ fontFamily: "var(--font-lato)", fontSize: "13px", fontWeight: 700, color: "#0f0f0f" }}>
-                    {c.username}
-                  </span>
-                </div>
-                <p style={{ fontFamily: "var(--font-lato)", fontSize: "14px", color: "#0f0f0f", lineHeight: 1.55, marginBottom: "6px" }}>
-                  {c.text}
-                </p>
-                {c.translation === "see-original" && (
-                  <p style={{ fontFamily: "var(--font-lato)", fontSize: "12px", color: "#065fd4", textDecoration: "underline", marginBottom: "6px" }}>
-                    See original (Translated by Google)
-                  </p>
-                )}
-                {c.translation === "translate" && (
-                  <p style={{ fontFamily: "var(--font-lato)", fontSize: "12px", color: "#065fd4", textDecoration: "underline", marginBottom: "6px" }}>
-                    Translate to English
-                  </p>
-                )}
-                <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 10v12M15 5.88L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
-                  </svg>
-                  <span style={{ fontFamily: "var(--font-lato)", fontSize: "12px", color: "#999" }}>
-                    {c.likes > 0 ? c.likes : ""}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div key={i} style={{ display: "flex", justifyContent: "center", marginTop: "32px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/youtube.png"
+            alt="YouTube comments — translated from Hindi"
+            style={{
+              width:     "75vw",
+              height:    "auto",
+              objectFit: "contain",
+            }}
+          />
         </div>
       );
       i++;
@@ -1132,7 +1092,7 @@ export default function WorkPage() {
       y: 0,
       transition: { duration: 0.32, ease: [0.76, 0, 0.24, 1] },
     });
-    router.push("/#projects");
+    router.push("/#work");
   };
 
   if (!project) {
@@ -1233,13 +1193,13 @@ export default function WorkPage() {
 
                 <h1 style={T.projectTitle}>{caseStudy.title}</h1>
 
-                <p className="mt-2.5" style={{ ...T.body, fontFamily: "proxima-nova, sans-serif", letterSpacing: "-0.028em", color: "var(--ink-3)", fontSize: "18px" }}>
+                <p className="mt-2.5" style={{ ...T.body, fontFamily: "var(--font-lato)", letterSpacing: "-0.028em", color: "var(--ink-3)", fontSize: "18px" }}>
                   {caseStudy.subtitle}
                 </p>
 
                 <p
                   className="mt-2"
-                  style={{ fontFamily: "proxima-nova, sans-serif", fontStyle: "italic", fontSize: "15px", letterSpacing: "-0.028em", color: "var(--ink-4)", lineHeight: 1.6 }}
+                  style={{ fontFamily: "var(--font-lato)", fontStyle: "italic", fontSize: "15px", letterSpacing: "-0.028em", color: "var(--ink-4)", lineHeight: 1.6 }}
                 >
                   {caseStudy.context} · {caseStudy.tools.join(", ")}
                 </p>

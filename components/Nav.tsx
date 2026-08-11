@@ -8,6 +8,16 @@ import { cn } from "@/components/ui/cn";
 
 const LETTERS = ['n', 'e', 'h', 'a'];
 
+const BOGART: React.CSSProperties = {
+  fontFamily: '"bogart", serif',
+  fontWeight: 700,
+  fontSize:   '36px',
+  color:      'var(--ink)',
+  display:    'inline-block',
+  lineHeight: 1,
+  userSelect: 'none',
+};
+
 function NavLink({
   href,
   children,
@@ -24,12 +34,12 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={cn(
-        "text-[13px] tracking-normal relative group transition-colors duration-200",
+        "tracking-normal relative group transition-colors duration-200",
         active
           ? "text-[var(--ink)]"
           : "text-[var(--ink-3)] hover:text-[var(--ink)]"
       )}
-      style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '15px' }}
+      style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '16px' }}
     >
       {children}
       <span
@@ -43,10 +53,10 @@ function NavLink({
 }
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const nameRef = useRef<HTMLSpanElement>(null);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const pathname                  = usePathname();
+  const nameRef                   = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -54,6 +64,7 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Staggered bounce-in on first intersection */
   useEffect(() => {
     const el = nameRef.current;
     if (!el) return;
@@ -83,8 +94,8 @@ export default function Nav() {
           scrolled && "backdrop-blur-md bg-white/92"
         )}
       >
-        {/* Mobile layout: hamburger | name | empty */}
-        <div className="md:hidden max-w-[1200px] mx-auto px-6 h-16 pt-3 grid grid-cols-3 items-center">
+        {/* Mobile */}
+        <div className="md:hidden max-w-[1200px] mx-auto px-6 h-14 grid grid-cols-3 items-center">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="w-8 h-8 flex flex-col justify-center items-start gap-1.5"
@@ -96,48 +107,25 @@ export default function Nav() {
           </button>
           <Link href="/" className="flex items-end justify-center" aria-label="Neha Jaitly — home">
             {LETTERS.map((letter) => (
-              <span
-                key={letter}
-                style={{
-                  fontFamily: 'var(--font-atma)',
-                  fontWeight: 600,
-                  fontSize: '36px',
-                  color: 'var(--ink)',
-                  display: 'inline-block',
-                  lineHeight: 1,
-                  userSelect: 'none',
-                }}
-              >
-                {letter}
-              </span>
+              <span key={letter} style={{ ...BOGART, fontSize: '20px' }}>{letter}</span>
             ))}
           </Link>
           <div />
         </div>
 
-        {/* Desktop layout: centered cluster — Work · About · name · Resume */}
-        <nav className="hidden md:flex items-center justify-center gap-8 h-16 pt-3">
-          <NavLink href="/#projects" active={pathname === "/"}>Work</NavLink>
-          <NavLink href="/about" active={pathname === "/about"}>About</NavLink>
+        {/* Desktop */}
+        <nav className="hidden md:flex items-center justify-center gap-8 h-16">
+          <NavLink href="/#work" active={pathname === "/"}>work</NavLink>
+          <NavLink href="/about"     active={pathname === "/about"}>about</NavLink>
 
           <span ref={nameRef}>
-            <Link
-              href="/"
-              className="flex items-end"
-              aria-label="Neha Jaitly — home"
-            >
+            <Link href="/" className="flex items-end" aria-label="Neha Jaitly — home">
               {LETTERS.map((letter) => (
                 <span
                   key={letter}
                   data-animate
                   style={{
-                    fontFamily: 'var(--font-atma)',
-                    fontWeight: 600,
-                    fontSize: '36px',
-                    color: 'var(--ink)',
-                    display: 'inline-block',
-                    lineHeight: 1,
-                    userSelect: 'none',
+                    ...BOGART,
                     transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLSpanElement).style.transform = 'translateY(-8px)'; }}
@@ -153,10 +141,10 @@ export default function Nav() {
             href="https://drive.google.com/your-resume-link"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[13px] tracking-normal relative group transition-colors duration-200 text-[var(--ink-3)] hover:text-[var(--ink)]"
-            style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '15px' }}
+            className="tracking-normal relative group transition-colors duration-200 text-[var(--ink-3)] hover:text-[var(--ink)]"
+            style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '16px' }}
           >
-            Resume
+            resume
             <span className="absolute -bottom-0.5 left-0 h-px bg-[var(--ink)] transition-all duration-300 w-0 group-hover:w-full" />
           </a>
         </nav>
@@ -174,8 +162,8 @@ export default function Nav() {
           >
             <div className="flex flex-col gap-8">
               {[
-                { href: "/#projects", label: "Work" },
-                { href: "/about", label: "About"  },
+                { href: "/#work", label: "Work"  },
+                { href: "/about",     label: "About" },
               ].map(({ href, label }, i) => (
                 <motion.div
                   key={href}
@@ -186,7 +174,7 @@ export default function Nav() {
                   <Link
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-5xl font-light tracking-tight not-italic"
+                    className="text-4xl font-light tracking-tight not-italic"
                     style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal' }}
                   >
                     {label}
@@ -202,7 +190,7 @@ export default function Nav() {
                   href="https://drive.google.com/your-resume-link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-5xl font-light tracking-tight not-italic"
+                  className="text-4xl font-light tracking-tight not-italic"
                   style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal' }}
                 >
                   Resume ↗
