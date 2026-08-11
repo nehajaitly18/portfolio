@@ -26,6 +26,9 @@ export interface TocSection {
 }
 
 export interface CaseStudy {
+  scrollPhone?: {
+    sections: any[];
+  };
   id: string;
   title: string;
   subtitle: string;
