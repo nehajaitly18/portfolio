@@ -52,6 +52,7 @@ export default function RootLayout({
       className={`${inter.variable} ${instrumentSerif.variable} ${playfairDisplay.variable}`}
     >
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="stylesheet" href="https://use.typekit.net/zsw4dlb.css" />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--bg)]">

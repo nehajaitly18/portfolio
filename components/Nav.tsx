@@ -93,6 +93,7 @@ export default function Nav() {
           "fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-500",
           scrolled && "backdrop-blur-md bg-white/92"
         )}
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
       >
         {/* Mobile */}
         <div className="md:hidden max-w-[1200px] mx-auto px-6 h-14 grid grid-cols-3 items-center">
