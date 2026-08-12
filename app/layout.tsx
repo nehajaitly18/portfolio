@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   title: "Neha Jaitly — Visual Designer",
   description:
     "Portfolio of Neha Jaitly, a visual designer balancing aesthetics and usability across branding, interfaces, and digital products.",
+  icons: {
+    icon: "/favicon-n.png",
+    apple: "/favicon-n.png",
+  },
   openGraph: {
     title: "Neha Jaitly — Visual Designer",
     description: "Portfolio of Neha Jaitly, visual designer.",
@@ -53,6 +57,8 @@ export default function RootLayout({
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="icon" type="image/png" href="/favicon-n.png" />
+        <link rel="apple-touch-icon" href="/favicon-n.png" />
         <link rel="stylesheet" href="https://use.typekit.net/zsw4dlb.css" />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--bg)]">
