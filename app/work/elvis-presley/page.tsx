@@ -215,7 +215,34 @@ export default function ElvisPresleyPage() {
         </div>
       </div>
 
-      {/* ── 5. Loop — full-bleed carousel ────────────────────── */}
+      {/* ── 5. Spread Gallery — 2 × 3 grid ──────────────────── */}
+      <div className="px-[6vw] py-16">
+        <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "16px" }}>
+          {[
+            "/elvis 1.png",
+            "/elvis 2.png",
+            "/elvis 3.png",
+            "/elvis 4.png",
+            "/elvis 5.png",
+            "/elvis 6.png",
+          ].map((src, i) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={src}
+              src={src}
+              alt={`Publication spread ${i + 1}`}
+              style={{
+                display:   "block",
+                width:     "100%",
+                height:    "auto",
+                objectFit: "contain",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ── 6. Loop — full-bleed carousel ────────────────────── */}
       <div style={{ width: "100vw", minHeight: "600px", overflow: "hidden" }}>
         <CrossfadeCarousel />
       </div>
