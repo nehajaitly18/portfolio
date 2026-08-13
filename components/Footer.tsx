@@ -105,7 +105,7 @@ export default function Footer() {
 
             {/* Resume */}
             <a
-              href="https://drive.google.com/your-resume-link"
+              href="https://drive.google.com/file/d/15KAo-F76DlpTJd1CSJuGZXczB2D-Dntl/view?usp=share_link"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -196,7 +196,7 @@ export default function Footer() {
             {[
               { label: "Home",  href: "/" },
               { label: "About", href: "/about" },
-              { label: "Work",  href: "/work" },
+              { label: "Work",  href: "/#work" },
             ].map(({ label, href }) => (
               <Link
                 key={label}

@@ -11,7 +11,7 @@ export type Block =
   | { type: "media-row"; aspect: string; items: { kind: "image" | "video"; label: string; src?: string; caption?: string }[] }
   | { type: "target-goals"; target: string; goals: string[] }
   | { type: "target-goals-pills"; target: string; goals: string[] }
-  | { type: "video"; label: string; aspect?: string; caption?: string }
+  | { type: "video"; label: string; aspect?: string; caption?: string; src?: string }
   | { type: "video-row"; videos: { label: string; caption?: string; src?: string; phoneFrame?: boolean }[]; aspect?: string }
   | { type: "youtube-comments"; label?: string; comments: { username: string; text: string; likes: number; translation?: "see-original" | "translate" }[] }
   | { type: "external-link"; label: string; href: string }
@@ -199,6 +199,11 @@ const midorm: CaseStudy = {
       label: "The Solution",
       heading: "The Solution",
       blocks: [
+        {
+          type: "video",
+          label: "Full prototype",
+          src: "/full prototype-2-2.mov",
+        },
         {
           type: "subheading",
           text: "User Testing Insights",

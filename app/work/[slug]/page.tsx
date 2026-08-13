@@ -890,7 +890,22 @@ function renderBlocks(blocks: Block[]) {
     if (b.type === "video") {
       output.push(
         <div key={i} className="mt-8">
-          <VideoSlot label={b.label} aspect={b.aspect} caption={b.caption} />
+          {b.src ? (
+            <div style={{ maxWidth: "70%", margin: "0 auto" }}>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", height: "auto", display: "block", borderRadius: "8px" }}
+              >
+                <source src={b.src} type="video/quicktime" />
+                <source src={b.src} type="video/mp4" />
+              </video>
+            </div>
+          ) : (
+            <VideoSlot label={b.label} aspect={b.aspect} caption={b.caption} />
+          )}
         </div>
       );
       i++;
