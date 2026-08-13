@@ -43,18 +43,17 @@ function ProjectCard({
       >
         {/* Thumbnail — full column width, no crop, no rounded corners */}
         {project.image && (
-          <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
+          <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" style={{ borderRadius: "8px", overflow: "hidden" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={project.image}
               alt={project.title}
               style={{
-                width:        "100%",
-                height:       "auto",
-                display:      "block",
-                objectFit:    "contain",
-                borderRadius: 0,
-                transform:    project.imageScale ? `scale(${project.imageScale})` : undefined,
+                width:     "100%",
+                height:    "auto",
+                display:   "block",
+                objectFit: "contain",
+                transform: project.imageScale ? `scale(${project.imageScale})` : undefined,
               }}
             />
           </div>

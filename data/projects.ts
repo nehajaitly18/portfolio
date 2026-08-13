@@ -74,7 +74,7 @@ export const projects: Project[] = [
     tags: ["Fintech", "UX Research", "Systems"],
     href: "/work/micro-merchant-loan",
     thumbClass: "project-thumb-5",
-    image: "/wireframes.png",
+    image: "/paytm cover.png",
   },
   {
     id: "michigan-arts",

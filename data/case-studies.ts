@@ -314,8 +314,9 @@ const microMerchantLoan: CaseStudy = {
   year: "2025",
   tools: ["Figma"],
   heroImage: {
-    label: "Image placeholder: Micro Merchant Loan hero",
-    aspect: "16/9",
+    label: "Micro Merchant Loan hero",
+    aspect: "21/9",
+    src: "/abcd.png",
   },
   sections: [
     {
@@ -476,21 +477,18 @@ const microMerchantLoan: CaseStudy = {
           type: "finding",
           title: "Clarity over complexity",
           body: "Plain language throughout. Never assume users know what \"tenure\" or \"EMI\" means.",
-          reasoning: "Given the target users were low-income merchants unfamiliar with financial jargon, language needed to feel approachable and never daunting.",
           bg: "#DAE7F3",
         },
         {
           type: "finding",
           title: "Education upfront",
           body: "Explain what a micro-loan is before users enter the flow.",
-          reasoning: "Users needed to understand what a micro-loan actually is before deciding to apply — informed users make more confident decisions.",
           bg: "#DAE7F3",
         },
         {
           type: "finding",
           title: "Transparency builds trust",
           body: "Show loan amount, tenure, and interest rate early before the user commits.",
-          reasoning: "Surfacing loan amount, tenure, and interest rate early means users are never caught off guard, reducing drop-off and building confidence.",
           bg: "#DAE7F3",
         },
         {
@@ -551,14 +549,14 @@ const microMerchantLoan: CaseStudy = {
         },
         {
           type: "finding",
-          title: "Design is about legibility, not just functionality",
-          body: "This project showed me that clarity builds trust and that even small decisions, from language to information order, can determine whether a user moves forward or drops off.",
+          title: "Research methods should match your users",
+          body: "YouTube comment sections gave me access to real merchants describing confusion in their own words.",
           borderColor: "#5A8FA8",
         },
         {
           type: "finding",
-          title: "Research methods should match your users",
-          body: "YouTube comment sections gave me access to real merchants describing confusion in their own words.",
+          title: "Design is about legibility, not just functionality",
+          body: "This project showed me that clarity builds trust and that even small decisions, from language to information order, can determine whether a user moves forward or drops off.",
           borderColor: "#5A8FA8",
         },
         {
@@ -571,12 +569,7 @@ const microMerchantLoan: CaseStudy = {
           type: "subheading",
           text: "If I Continued This Project",
         },
-        {
-          type: "finding",
-          title: "Multilingual onboarding",
-          body: "[SECTION PLACEHOLDER - add multilingual onboarding description here]",
-          borderColor: "#5A8FA8",
-        },
+
         {
           type: "finding",
           title: "In-context usability testing",

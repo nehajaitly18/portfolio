@@ -9,14 +9,16 @@ export default function Hero() {
         .hero-img {
           animation: hero-rock 4.5s ease-in-out infinite;
         }
-        @media (max-width: 430px) {
+        @media (max-width: 767px) {
           .hero-img {
-            width: 80vw !important;
+            width: 88vw !important;
           }
           .hero-subtitle {
-            margin-top: -36px !important;
-            font-size: 21px !important;
-            padding-bottom: 32px !important;
+            margin-top: 16px !important;
+            font-size: clamp(18px, 5vw, 22px) !important;
+            padding-bottom: 40px !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
           }
           .hero-subtitle br {
             display: none;

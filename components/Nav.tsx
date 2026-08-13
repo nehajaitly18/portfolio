@@ -9,13 +9,14 @@ import { cn } from "@/components/ui/cn";
 const LETTERS = ['n', 'e', 'h', 'a'];
 
 const BOGART: React.CSSProperties = {
-  fontFamily: '"bogart", serif',
-  fontWeight: 700,
-  fontSize:   '36px',
-  color:      'var(--ink)',
-  display:    'inline-block',
-  lineHeight: 1,
-  userSelect: 'none',
+  fontFamily:    '"bogart", serif',
+  fontWeight:    700,
+  fontSize:      '26px',
+  color:         'var(--ink)',
+  display:       'inline-block',
+  lineHeight:    1,
+  userSelect:    'none',
+  letterSpacing: '-0.03em',
 };
 
 function NavLink({
@@ -95,28 +96,29 @@ export default function Nav() {
         )}
       >
         {/* Mobile */}
-        <div className="md:hidden max-w-[1200px] mx-auto px-6 h-14 grid grid-cols-3 items-center">
+        <div className="md:hidden relative px-5 h-14 flex items-center">
+          {/* Logo — absolutely centered */}
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-end" aria-label="Neha Jaitly — home">
+            {LETTERS.map((letter) => (
+              <span key={letter} style={{ ...BOGART, fontSize: '20px' }}>{letter}</span>
+            ))}
+          </Link>
+          {/* Hamburger — right */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="w-8 h-8 flex flex-col justify-center items-start gap-1.5"
+            className="ml-auto w-10 h-10 flex flex-col justify-center items-center gap-1.5"
             aria-label="Toggle menu"
           >
             <span className={cn("block h-px bg-[var(--ink)] transition-all duration-300", menuOpen ? "w-6 translate-y-[5px] rotate-45" : "w-6")} />
             <span className={cn("block h-px bg-[var(--ink)] transition-all duration-300", menuOpen ? "opacity-0 w-4" : "w-4")} />
             <span className={cn("block h-px bg-[var(--ink)] transition-all duration-300", menuOpen ? "w-6 -translate-y-[5px] -rotate-45" : "w-6")} />
           </button>
-          <Link href="/" className="flex items-end justify-center" aria-label="Neha Jaitly — home">
-            {LETTERS.map((letter) => (
-              <span key={letter} style={{ ...BOGART, fontSize: '20px' }}>{letter}</span>
-            ))}
-          </Link>
-          <div />
         </div>
 
         {/* Desktop */}
         <nav className="hidden md:flex items-center justify-center gap-8 h-16">
-          <NavLink href="/#work" active={pathname === "/"}>work</NavLink>
-          <NavLink href="/about"     active={pathname === "/about"}>about</NavLink>
+          <NavLink href="/#work" active={pathname === "/"}>Work</NavLink>
+          <NavLink href="/about"     active={pathname === "/about"}>About</NavLink>
 
           <span ref={nameRef}>
             <Link href="/" className="flex items-end" aria-label="Neha Jaitly — home">
@@ -144,7 +146,7 @@ export default function Nav() {
             className="tracking-normal relative group transition-colors duration-200 text-[var(--ink-3)] hover:text-[var(--ink)]"
             style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '16px' }}
           >
-            resume
+            Resume
             <span className="absolute -bottom-0.5 left-0 h-px bg-[var(--ink)] transition-all duration-300 w-0 group-hover:w-full" />
           </a>
         </nav>
@@ -158,7 +160,7 @@ export default function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-40 bg-white flex flex-col justify-center px-8 md:hidden"
+            className="fixed inset-0 z-[45] bg-white flex flex-col justify-center px-8 md:hidden"
           >
             <div className="flex flex-col gap-8">
               {[

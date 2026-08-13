@@ -217,6 +217,25 @@ export default function LaRazaPage() {
       <div style={{ background: "#111110", width: "100%" }}>
         <div className="max-w-[960px] mx-auto px-6 md:px-10 pt-12 pb-12">
 
+          {/* Mobile back link */}
+          <a
+            href="/"
+            onClick={handleBack}
+            style={{
+              fontFamily:     "var(--font-lato)",
+              fontSize:       "15px",
+              letterSpacing:  "0.12em",
+              textTransform:  "uppercase" as const,
+              color:          "rgba(255,255,255,0.38)",
+              display:        "inline-block",
+              textDecoration: "none",
+              marginBottom:   "32px",
+            }}
+            className="lg:hidden hover:opacity-70 transition-opacity duration-200"
+          >
+            ← Work
+          </a>
+
           {/* Title */}
           <h1 style={{
             fontFamily:    "Georgia, serif",

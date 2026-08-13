@@ -135,7 +135,7 @@ function TableOfContents({
         </a>
       </div>
 
-      <p style={{ ...T.mono, fontFamily: "var(--font-lato)", fontSize: "15px" }} className="mb-4">Contents</p>
+      <p style={{ ...T.mono, fontFamily: "var(--font-lato)", fontSize: "15px", textTransform: "none" }} className="mb-4">Contents</p>
       <ul className="space-y-0.5">
         {sections.map((s) => {
           const isActive = activeId === s.id;
@@ -1017,7 +1017,7 @@ function renderBlocks(blocks: Block[]) {
           </div>
           <p style={{ ...T.body, fontSize: "14px", color: "var(--ink)" }}>{b.body}</p>
           {b.reasoning && (
-            <p style={{ fontFamily: "var(--font-lato)", fontStyle: "italic", fontWeight: 300, fontSize: "14px", color: "#666", lineHeight: 1.6, marginTop: "8px" }}>
+            <p style={{ fontFamily: "var(--font-lato)", fontStyle: "italic", fontWeight: 300, fontSize: "14px", color: b.bg ? "var(--ink)" : "#666", lineHeight: 1.6, marginTop: "8px" }}>
               {b.reasoning}
             </p>
           )}
@@ -1135,13 +1135,15 @@ export default function WorkPage() {
 
       {/* ── Hero image — full width ───────────────────────────── */}
       {caseStudy.heroImage.src ? (
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden slug-hero-wrap" style={{ aspectRatio: caseStudy.heroImage.aspect ?? "21/9" }}>
+          <style>{`@media (max-width: 767px) { .slug-hero-wrap { aspect-ratio: 4/3 !important; } }`}</style>
           <Image
             src={caseStudy.heroImage.src}
             alt={caseStudy.title}
             width={1600}
             height={900}
-            className="w-full h-auto block"
+            className="w-full h-full block"
+            style={{ objectFit: "cover", objectPosition: "center 40%" }}
             priority
           />
         </div>
@@ -1250,36 +1252,7 @@ export default function WorkPage() {
         </div>
       </div>
 
-      {/* ── Next project ──────────────────────────────────── */}
-      <div className="border-t border-[var(--border)] section-warm">
-        <div className="max-w-[960px] mx-auto px-6 md:px-10 py-14">
-          <Link href={nextProject.href} className="group block">
-            <span style={T.mono} className="block mb-4">Next</span>
-            <div className="flex items-baseline gap-4">
-              <h3
-                className="transition-opacity duration-300 group-hover:opacity-60"
-                style={{
-                  fontFamily:    "var(--font-playfair)",
-                  fontStyle:     "italic",
-                  fontWeight:    400,
-                  fontSize:      "clamp(30px, 4.5vw, 48px)",
-                  lineHeight:    1.0,
-                  letterSpacing: "-0.025em",
-                  color:         "var(--ink)",
-                }}
-              >
-                {nextProject.title}
-              </h3>
-              <span className="text-[var(--ink-3)] text-xl transition-transform duration-300 group-hover:translate-x-2 inline-block">
-                →
-              </span>
-            </div>
-            <p className="mt-2 text-[11px] text-[var(--ink-4)]" style={{ fontFamily: "var(--font-lato)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-              {nextProject.category}
-            </p>
-          </Link>
-        </div>
-      </div>
+
     </motion.div>
     </motion.div>
   );

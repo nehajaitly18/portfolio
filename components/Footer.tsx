@@ -12,15 +12,15 @@ export default function Footer() {
           padding:        "72px 80px",
           display:        "flex",
           flexWrap:       "wrap",
-          alignItems:     "center",
+          alignItems:     "flex-start",
           justifyContent: "space-between",
-          gap:            "48px",
+          gap:            "40px",
         }}
         className="px-6 md:px-20"
       >
 
         {/* ── Left ───────────────────────────────────────────── */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", flex: "1 1 280px" }}>
 
           <span
             style={{
@@ -174,8 +174,9 @@ export default function Footer() {
           style={{
             display:       "flex",
             flexDirection: "column",
-            alignItems:    "flex-end",
+            alignItems:    "flex-start",
             gap:           "16px",
+            flex:          "0 0 auto",
           }}
         >
           <span
@@ -191,7 +192,7 @@ export default function Footer() {
             Links
           </span>
 
-          <nav style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "16px" }}>
+          <nav style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
             {[
               { label: "Home",  href: "/" },
               { label: "About", href: "/about" },

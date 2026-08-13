@@ -99,7 +99,7 @@ export default function ElvisPresleyPage() {
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/intro page.png"
+        src="/hero.png"
         alt="Through the Cover — hero"
         style={{
           display:  "block",
@@ -132,33 +132,22 @@ export default function ElvisPresleyPage() {
           2025 &middot; Publication &middot; Adobe InDesign
         </p>
 
-        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-16">
-
-          {/* Left: section heading */}
-          <div className="md:shrink-0 md:w-[200px]">
-            <h2
-              style={{
-                fontFamily:    "Georgia, serif",
-                fontWeight:    400,
-                fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
-                lineHeight:    1.1,
-                letterSpacing: "-0.02em",
-                color:         "var(--ink)",
-              }}
-            >
-              About the Project
-            </h2>
-          </div>
-
-          {/* Right: body paragraphs */}
-          <div style={{ flex: 1 }}>
-            <p style={T.body}>
-              Through the Cover is an editorial book exploring Elvis Presley&rsquo;s 1970s albums as a cultural time capsule. Organized into four thematic chapters — Cinema and Song, Rock &apos;n&apos; Roll, Pop Appeal, and Glamour of the Disco. The book pairs his albums with the cultural moments they reflected, treating his music and image as a visual record of the decade.
-            </p>
-
-          </div>
-
-        </div>
+        <h2
+          style={{
+            fontFamily:    "Georgia, serif",
+            fontWeight:    400,
+            fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
+            lineHeight:    1.1,
+            letterSpacing: "-0.02em",
+            color:         "var(--ink)",
+            marginBottom:  "24px",
+          }}
+        >
+          About the Project
+        </h2>
+        <p style={T.body}>
+          Through the Cover is an editorial book exploring Elvis Presley&rsquo;s 1970s albums as a cultural time capsule. Organized into four thematic chapters — Cinema and Song, Rock &apos;n&apos; Roll, Pop Appeal, and Glamour of the Disco. The book pairs his albums with the cultural moments they reflected, treating his music and image as a visual record of the decade.
+        </p>
       </div>
 
       {/* ── 3. Spread 1 & 2 — full-bleed, side by side ──────── */}
@@ -189,30 +178,22 @@ export default function ElvisPresleyPage() {
 
       {/* ── 4. Second Text Section ───────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-8">
-        <div className="flex flex-col md:flex-row items-start gap-6 md:gap-16">
-
-          <div className="md:shrink-0 md:w-[200px]">
-            <h2
-              style={{
-                fontFamily:    "Georgia, serif",
-                fontWeight:    400,
-                fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
-                lineHeight:    1.1,
-                letterSpacing: "-0.02em",
-                color:         "var(--ink)",
-              }}
-            >
-              The Story
-            </h2>
-          </div>
-
-          <div style={{ flex: 1 }}>
-            <p style={T.body}>
-              The project asks a simple question: what can an album cover tell us about the moment it was made in? Each chapter pairs select Elvis albums with the cultural currents of the time — from his rock &apos;n&apos; roll rebellion to his global reach with Aloha from Hawaii. In the disco chapter, for instance, the book connects his glam stage looks to the era&rsquo;s culture of spectacle and escapism. Across the book, each album becomes less a catalog entry and more a marker of what was happening in Elvis&rsquo;s life and the world around him.
-            </p>
-          </div>
-
-        </div>
+        <h2
+          style={{
+            fontFamily:    "Georgia, serif",
+            fontWeight:    400,
+            fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
+            lineHeight:    1.1,
+            letterSpacing: "-0.02em",
+            color:         "var(--ink)",
+            marginBottom:  "24px",
+          }}
+        >
+          The Story
+        </h2>
+        <p style={T.body}>
+          The project asks a simple question: what can an album cover tell us about the moment it was made in? Each chapter pairs select Elvis albums with the cultural currents of the time — from his rock &apos;n&apos; roll rebellion to his global reach with Aloha from Hawaii. In the disco chapter, for instance, the book connects his glam stage looks to the era&rsquo;s culture of spectacle and escapism. Across the book, each album becomes less a catalog entry and more a marker of what was happening in Elvis&rsquo;s life and the world around him.
+        </p>
       </div>
 
       {/* ── 5. Spread Gallery — 2 × 3 grid ──────────────────── */}
@@ -266,18 +247,19 @@ export default function ElvisPresleyPage() {
       </div>
 
       {/* ── 7. Three images — grid, equal height ────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", width: "100%", background: "#ffffff" }}>
+      <style>{`@media (max-width: 767px) { .elvis-img-grid { grid-template-columns: 1fr 1fr !important; gap: 6px !important; margin-top: 40px !important; } .elvis-img-grid > div { height: 220px !important; } }`}</style>
+      <div className="elvis-img-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", width: "100%", background: "#ffffff", marginTop: "64px" }}>
         {[
           { src: "/loop 1.png",     alt: "Loop image 1" },
           { src: "/loop 3.png",     alt: "Loop image 3" },
-          { src: "/elvis flap.png", alt: "Elvis flap"   },
+          { src: "/elviis flap 1.png", alt: "Elvis flap"   },
         ].map(({ src, alt }) => (
           <div key={src} style={{ height: "400px", background: "#ffffff" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt={alt}
-              style={{ display: "block", width: "100%", height: "100%", objectFit: "contain" }}
+              style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
         ))}

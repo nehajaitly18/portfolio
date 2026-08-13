@@ -95,7 +95,12 @@ export default function PennyStampsPage() {
 
   return (
     <>
-    <style>{`@media (max-width: 767px) { .penny-page { margin-top: -56px !important; } }`}</style>
+    <style>{`
+      @media (max-width: 767px) {
+        .penny-page { margin-top: -56px !important; }
+        .penny-img-pair img { height: 260px !important; }
+      }
+    `}</style>
     <motion.div className="penny-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
       <BackButton />
 
@@ -334,7 +339,7 @@ export default function PennyStampsPage() {
       </div>
 
       {/* ── 7. Full-width image pair ──────────────────────────── */}
-      <div className="flex flex-col md:flex-row" style={{ gap: "8px" }}>
+      <div className="penny-img-pair flex flex-col md:flex-row" style={{ gap: "8px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/icon final.png"
@@ -360,7 +365,7 @@ export default function PennyStampsPage() {
       />
 
       {/* ── 9. Full-width image pair ──────────────────────────── */}
-      <div className="flex flex-col md:flex-row" style={{ gap: "8px" }}>
+      <div className="penny-img-pair flex flex-col md:flex-row" style={{ gap: "8px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/Building Staircase Mockup.png"
