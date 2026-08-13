@@ -56,20 +56,6 @@ const midorm: CaseStudy = {
     aspect: "16/9",
     src: "/gen.png",
   },
-  scrollPhone: {
-    sections: [
-      { id: "overview",         videoSrc: "/overview-video.mp4.mov" },
-      { id: "the-problem",      videoSrc: null },
-      { id: "research",         videoSrc: null },
-      { id: "discovery",        videoSrc: null },
-      { id: "mobile-first",     videoSrc: "/mobile-first-video.mp4.mov" },
-      { id: "design-decisions", videoSrc: null },
-      { id: "photo-gallery",    videoSrc: null },
-      { id: "user-testing",     videoSrc: null },
-      { id: "final-delivery",   videoSrc: null },
-      { id: "reflections",      videoSrc: null },
-    ],
-  },
   sections: [
     {
       id: "overview",
