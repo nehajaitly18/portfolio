@@ -216,7 +216,7 @@ export default function ElvisPresleyPage() {
       </div>
 
       {/* ── 5. Spread Gallery — 2 × 3 grid ──────────────────── */}
-      <div className="px-[6vw] py-16">
+      <div className="px-[6vw] py-16" style={{ display: "none" }}>
         <div className="grid grid-cols-2 md:grid-cols-3" style={{ gap: "16px" }}>
           {[
             "/elvis 1.png",
@@ -242,9 +242,45 @@ export default function ElvisPresleyPage() {
         </div>
       </div>
 
-      {/* ── 6. Loop — full-bleed carousel ────────────────────── */}
-      <div style={{ width: "100vw", minHeight: "600px", overflow: "hidden" }}>
-        <CrossfadeCarousel />
+      {/* ── 6. Visual Identity ───────────────────────────────── */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-4">
+        <h2
+          style={{
+            fontFamily:    "Georgia, serif",
+            fontWeight:    400,
+            fontSize:      "clamp(1.1rem, 2.5vw, 1.625rem)",
+            lineHeight:    1.1,
+            letterSpacing: "-0.02em",
+            color:         "var(--ink)",
+            marginBottom:  "32px",
+          }}
+        >
+          Visual Identity
+        </h2>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/elvis visual identity.- large png.png"
+          alt="Visual identity — typeface and colour palette"
+          style={{ display: "block", width: "100%", height: "auto", marginLeft: "-12px" }}
+        />
+      </div>
+
+      {/* ── 7. Three images — grid, equal height ────────────── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", width: "100%", background: "#ffffff" }}>
+        {[
+          { src: "/loop 1.png",     alt: "Loop image 1" },
+          { src: "/loop 3.png",     alt: "Loop image 3" },
+          { src: "/elvis flap.png", alt: "Elvis flap"   },
+        ].map(({ src, alt }) => (
+          <div key={src} style={{ height: "400px", background: "#ffffff" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              style={{ display: "block", width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          </div>
+        ))}
       </div>
 
     </motion.div>

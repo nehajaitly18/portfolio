@@ -49,11 +49,12 @@ function ProjectCard({
               src={project.image}
               alt={project.title}
               style={{
-                width:      "100%",
-                height:     "auto",
-                display:    "block",
-                objectFit:  "contain",
+                width:        "100%",
+                height:       "auto",
+                display:      "block",
+                objectFit:    "contain",
                 borderRadius: 0,
+                transform:    project.imageScale ? `scale(${project.imageScale})` : undefined,
               }}
             />
           </div>

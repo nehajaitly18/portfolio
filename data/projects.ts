@@ -9,6 +9,7 @@ export interface Project {
   href: string;
   thumbClass: string;
   image?: string;
+  imageScale?: number;
   featured?: boolean;
 }
 
@@ -40,16 +41,16 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: "micro-merchant-loan",
+    id: "la-raza",
     index: "03",
-    title: "Micro Merchant Loan",
-    category: "UX / UI Design",
-    year: "2025",
-    description: "Redesigning the loan application experience for micro-merchants at Paytm — reducing friction and increasing accessibility for India's informal economy.",
-    tags: ["Fintech", "UX Research", "Systems"],
-    href: "/work/micro-merchant-loan",
+    title: "La Raza Arts",
+    category: "Exhibition Design",
+    year: "2024",
+    description: "Zine design for the La Raza Arts and Media Collective's exhibition — a tactile artifact connecting community storytelling with contemporary visual culture.",
+    tags: ["Zine", "Exhibition", "Print"],
+    href: "/work/la-raza",
     thumbClass: "project-thumb-3",
-    image: "/wireframes.png",
+    image: "/zine cover image-1.png",
   },
   {
     id: "penny-stamps",
@@ -61,19 +62,19 @@ export const projects: Project[] = [
     tags: ["Wayfinding", "Branding", "Signage"],
     href: "/work/penny-stamps",
     thumbClass: "project-thumb-4",
-    image: "/wayfinding cover.png",
+    image: "/map hero.png",
   },
   {
-    id: "la-raza",
+    id: "micro-merchant-loan",
     index: "05",
-    title: "La Raza Arts",
-    category: "Exhibition Design",
-    year: "2024",
-    description: "Zine design for the La Raza Arts and Media Collective's exhibition — a tactile artifact connecting community storytelling with contemporary visual culture.",
-    tags: ["Zine", "Exhibition", "Print"],
-    href: "/work/la-raza",
+    title: "Micro Merchant Loan",
+    category: "UX / UI Design",
+    year: "2025",
+    description: "Redesigning the loan application experience for micro-merchants at Paytm — reducing friction and increasing accessibility for India's informal economy.",
+    tags: ["Fintech", "UX Research", "Systems"],
+    href: "/work/micro-merchant-loan",
     thumbClass: "project-thumb-5",
-    image: "/zine cover image-1.png",
+    image: "/wireframes.png",
   },
   {
     id: "michigan-arts",

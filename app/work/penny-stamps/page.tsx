@@ -162,7 +162,7 @@ export default function PennyStampsPage() {
       </div>
 
       {/* ── 3. Overview ──────────────────────────────────────── */}
-      <div className="max-w-[960px] mx-auto px-6 md:px-10 pt-12 pb-24">
+      <div className="max-w-[960px] mx-auto px-6 md:px-10 pt-12 pb-10">
         <h2 style={{ ...T.sectionHeading, marginBottom: "24px" }}>Overview</h2>
         <p style={T.body}>
           This project focused on redesigning the school&apos;s wayfinding system to establish
@@ -172,44 +172,30 @@ export default function PennyStampsPage() {
 
       {/* ── 4. Problem ───────────────────────────────────────── */}
       <div className="max-w-[960px] mx-auto px-6 md:px-10 pb-24">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
+        <h2 style={{ ...T.sectionHeading, marginBottom: "24px" }}>Problem</h2>
+        <p style={T.body}>
+          The Penny W. Stamps School of Art and Design struggles with an outdated and
+          inconsistent signage and wayfinding system. The lack of a clear visual and structural
+          system makes navigation confusing, particularly for new students and visitors. As a
+          result, users often rely on trial and error rather than intuitive cues, creating
+          friction in how people experience and move through the school.
+        </p>
 
-          {/* Left: heading + body */}
-          <div className="w-full md:w-[440px] md:shrink-0">
-            <h2 style={{ ...T.sectionHeading, marginBottom: "24px" }}>Problem</h2>
-            <p style={T.body}>
-              The Penny W. Stamps School of Art and Design struggles with an outdated and
-              inconsistent signage and wayfinding system. The lack of a clear visual and structural
-              system makes navigation confusing, particularly for new students and visitors. As a
-              result, users often rely on trial and error rather than intuitive cues, creating
-              friction in how people experience and move through the school.
-            </p>
-          </div>
-
-          {/* Right: 3 images */}
-          <div className="grid grid-cols-3 gap-2 md:gap-3 w-full md:flex-1">
-            {[
-              { src: "/way 1.jpg",   alt: "Existing signage 1" },
-              { src: "/way 2.png",   alt: "Existing signage 2" },
-              { src: "/way 3.1.jpg", alt: "Existing signage 3" },
-            ].map(({ src, alt }) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={src}
-                src={src}
-                alt={alt}
-                className="w-full"
-                style={{
-                  height:          "clamp(120px, 20vw, 240px)",
-                  objectFit:       "cover",
-                  objectPosition:  "top",
-                  display:         "block",
-                }}
-              />
-            ))}
-          </div>
-
-        </div>
+        {/* Problem image: phone version on mobile, full version on desktop */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/stamps problem.png"
+          alt="Problem — existing signage"
+          className="hidden md:block"
+          style={{ width: "calc(100% + 20px)", height: "auto", marginTop: "40px", marginLeft: "-20px" }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/stamps problem phone.png"
+          alt="Problem — existing signage"
+          className="block md:hidden w-full"
+          style={{ height: "auto", marginTop: "40px" }}
+        />
       </div>
 
       {/* ── 5. Color Palette ─────────────────────────────────── */}
