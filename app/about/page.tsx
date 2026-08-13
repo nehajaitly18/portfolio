@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -347,239 +348,85 @@ export default function AboutPage() {
   const expRef = useRef<HTMLElement>(null);
   const expInView = useInView(expRef, { once: true, margin: "-60px" });
 
+  const [imgReady, setImgReady] = useState(false);
+  const pathname = usePathname();
+
+  // Reset + preload on every navigation to /about so wipe re-triggers
+  useEffect(() => {
+    setImgReady(false);
+    const img = new window.Image();
+    img.src = "/08.png";
+    const show = () => requestAnimationFrame(() => requestAnimationFrame(() => setImgReady(true)));
+    if (img.complete) {
+      show();
+    } else {
+      img.onload = show;
+    }
+  }, [pathname]);
+
   return (
     <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
 
       {/* ── Full-screen hero image ─────────────────────────── */}
-      <div style={{ position: "relative", width: "100%", height: "100vh" }}>
-        <Image
-          src="/about me screen.png"
+      <div style={{ display: "flex", justifyContent: "center", padding: "32px 24px 0" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <motion.img
+          key={pathname}
+          src="/08.png"
           alt=""
-          fill
-          style={{ objectFit: "cover" }}
-          priority
+          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          animate={imgReady ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
+          style={{ width: "55%", height: "auto", display: "block" }}
         />
       </div>
 
-      {/* ── Second hero image ─────────────────────────────── */}
-      <div style={{ position: "relative", width: "100%", height: "100vh" }}>
-        <Image
-          src="/about me screen-2.png"
-          alt=""
-          fill
-          style={{ objectFit: "cover" }}
-        />
+      <div style={{ display: "flex", justifyContent: "center", paddingTop: "16px", paddingBottom: "0" }}>
+        <p style={{
+          fontFamily:    '"bogart", serif',
+          fontWeight:    700,
+          fontSize:      "clamp(1.5rem, 3.5vw, 2.75rem)",
+          color:         "var(--ink)",
+          letterSpacing: "-0.03em",
+          lineHeight:    1,
+          margin:        0,
+        }}>
+          Hi There &lt;3
+        </p>
       </div>
 
-      {/* ── Section 1: Split hero ──────────────────────────── */}
-      <section
-        ref={heroRef}
-        style={{
-          paddingTop:    "clamp(64px, 8vw, 120px)",
-          paddingBottom: "clamp(64px, 8vw, 96px)",
-        }}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
-          <div
-            className="grid grid-cols-1 md:grid-cols-2"
-            style={{ gap: "clamp(48px, 6vw, 80px)", alignItems: "center" }}
-          >
-
-            {/* Left: text */}
-            <div>
-              {/* Name */}
-              <div style={{ overflow: "hidden", marginBottom: 20 }}>
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={heroInView ? { y: "0%" } : {}}
-                  transition={{ duration: 0.95, ease: EXPO, delay: 0.1 }}
-                  style={{
-                    fontFamily:    "var(--font-playfair)",
-                    fontStyle:     "italic",
-                    fontWeight:    400,
-                    fontSize:      "clamp(48px, 5.5vw, 80px)",
-                    lineHeight:    1.05,
-                    color:         "var(--ink)",
-                    letterSpacing: "-0.025em",
-                  }}
-                >
-                  Neha Jaitly
-                </motion.h1>
-              </div>
-
-              {/* Tagline */}
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, ease: EXPO, delay: 0.38 }}
-                className="section-label"
-                style={{ marginBottom: 32 }}
-              >
-                Graphic &amp; UX Designer · University of Michigan
-              </motion.p>
-
-              {/* Short rule */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={heroInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.6, ease: EXPO, delay: 0.52 }}
-                style={{
-                  height:          1,
-                  background:      "var(--border)",
-                  marginBottom:    32,
-                  width:           64,
-                  transformOrigin: "left",
-                }}
-              />
-
-              {/* Bio */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, ease: EXPO, delay: 0.62 }}
-                style={{
-                  fontFamily:   "var(--font-lato)",
-                  fontSize:     18,
-                  fontWeight:   300,
-                  color:        "var(--ink-2)",
-                  lineHeight:   1.7,
-                  marginBottom: 16,
-                }}
-              >
-                A graphic and UX designer. I enjoy designing experiences that balance
-                aesthetics and usability — combining strong visual systems with
-                thoughtful interaction design.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, ease: EXPO, delay: 0.74 }}
-                style={{
-                  fontFamily: "var(--font-lato)",
-                  fontSize:   16,
-                  fontWeight: 300,
-                  color:      "var(--ink-3)",
-                  lineHeight: 1.7,
-                }}
-              >
-                Fueled by the small details in design and a constant curiosity to keep learning.
-              </motion.p>
-            </div>
-
-            {/* Right: portrait */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, ease: EXPO, delay: 0.22 }}
-              className="order-first md:order-last"
-              style={{
-                position:     "relative",
-                aspectRatio:  "3/4",
-                borderRadius: 3,
-                overflow:     "hidden",
-                border:       "1px solid var(--border)",
-              }}
-            >
-              <Image
-                src="/photo-1.png"
-                alt="Neha Jaitly"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center top" }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── Section 2: Interests ──────────────────────────── */}
-      <section
-        ref={interestsRef}
-        className="section-warm"
-        style={{
-          borderTop:     "1px solid var(--border)",
-          paddingTop:    "clamp(64px, 8vw, 96px)",
-          paddingBottom: "clamp(64px, 8vw, 96px)",
-        }}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
-
-          {/* Rule */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={interestsInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, ease: EXPO }}
-            style={{
-              height:          1,
-              background:      "var(--border-strong)",
-              marginBottom:    32,
-              transformOrigin: "left",
-            }}
-          />
-
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={interestsInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="section-label"
-            style={{ display: "block", marginBottom: 48 }}
-          >
-            A little more
-          </motion.span>
-
-          {/* Interest cards */}
-          <div
-            style={{
-              display:       "flex",
-              gap:           24,
-              overflowX:     "auto",
-              paddingBottom: 8,
-              alignItems:    "flex-end",
-              scrollbarWidth: "none" as const,
-            }}
-          >
-            {INTEREST_CARDS.map(({ id, rot, El }, i) => (
-              <motion.div
-                key={id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={interestsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, ease: EXPO, delay: 0.2 + i * 0.08 }}
-                style={{ transform: `rotate(${rot}deg)`, flexShrink: 0 }}
-              >
-                <El />
-              </motion.div>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left", padding: "32px 24px 0", maxWidth: "640px", margin: "0 auto" }}>
+        <p style={{
+          fontFamily: "var(--font-lato)",
+          fontSize:   "17px",
+          fontWeight: 300,
+          color:      "var(--ink-2)",
+          lineHeight: 1.7,
+          margin:     "0 0 16px 0",
+        }}>
+          A graphic and UX designer. I enjoy designing experiences that balance aesthetics and usability — combining strong visual systems with thoughtful interaction design.
+        </p>
+        <p style={{
+          fontFamily: "var(--font-lato)",
+          fontSize:   "16px",
+          fontWeight: 300,
+          color:      "var(--ink-3)",
+          lineHeight: 1.7,
+          margin:     0,
+        }}>
+          Fueled by the small details in design and a constant curiosity to keep learning.
+        </p>
+      </div>
 
       {/* ── Section 3: Experience ─────────────────────────── */}
       <section
         ref={expRef}
         style={{
-          borderTop:     "1px solid var(--border)",
           paddingTop:    "clamp(64px, 8vw, 96px)",
           paddingBottom: "clamp(64px, 8vw, 96px)",
         }}
       >
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
-
-          {/* Rule */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={expInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, ease: EXPO }}
-            style={{
-              height:          1,
-              background:      "var(--border-strong)",
-              marginBottom:    32,
-              transformOrigin: "left",
-            }}
-          />
 
           <motion.span
             initial={{ opacity: 0 }}

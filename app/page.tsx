@@ -7,6 +7,10 @@ import ProjectList from "@/components/ProjectList";
 
 export default function Home() {
   useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.history.replaceState(null, "", "/");
     window.scrollTo(0, 0);
   }, []);
 

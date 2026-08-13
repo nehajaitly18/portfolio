@@ -118,12 +118,7 @@ export default function Nav() {
         {/* Desktop */}
         <nav className="hidden md:flex items-center justify-center gap-8 h-16">
           <NavLink href="/#work" active={pathname === "/"}>Work</NavLink>
-          <span
-            data-cursor-label="Coming soon"
-            style={{ fontFamily: 'var(--font-lato)', fontWeight: 400, fontSize: '16px', color: 'var(--ink-4)', cursor: 'none', userSelect: 'none' }}
-          >
-            About
-          </span>
+          <NavLink href="/about" active={pathname === "/about"}>About</NavLink>
 
           <span ref={nameRef}>
             <Link href="/" className="flex items-end" aria-label="Neha Jaitly — home">
@@ -170,6 +165,7 @@ export default function Nav() {
             <div className="flex flex-col gap-8">
               {[
                 { href: "/#work", label: "Work"  },
+                { href: "/about",  label: "About" },
               ].map(({ href, label }, i) => (
                 <motion.div
                   key={href}
@@ -187,19 +183,6 @@ export default function Nav() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.06, duration: 0.4 }}
-              >
-                <span
-                  className="text-4xl font-light tracking-tight not-italic"
-                  style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal', color: 'var(--ink-4)', cursor: 'not-allowed', display: 'flex', alignItems: 'center', gap: '12px' }}
-                >
-                  About
-                  <span style={{ fontFamily: 'var(--font-lato)', fontSize: '13px', fontWeight: 400, color: 'var(--ink-4)', letterSpacing: '0.04em' }}>Coming soon</span>
-                </span>
-              </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
