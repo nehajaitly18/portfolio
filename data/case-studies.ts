@@ -16,7 +16,13 @@ export type Block =
   | { type: "youtube-comments"; label?: string; comments: { username: string; text: string; likes: number; translation?: "see-original" | "translate" }[] }
   | { type: "external-link"; label: string; href: string }
   | { type: "carousel"; images: { src: string; alt: string }[] }
-  | { type: "before-after-toggle"; beforeSrc?: string; afterSrc?: string; beforeLabel: string; afterLabel: string };
+  | { type: "before-after-toggle"; beforeSrc?: string; afterSrc?: string; beforeLabel: string; afterLabel: string }
+  | { type: "centered-image"; src: string; label: string; maxWidth?: string; caption?: string }
+  | { type: "problem-cards"; cards: Array<{ heading: string; body: string }>; cardBg?: string }
+  | { type: "feature-split"; heading: string; body: string; videoSrc: string }
+  | { type: "quote-cards"; cards: Array<{ quote: string; attribution: string }>; cardBg?: string }
+  | { type: "revision-rows"; rows: Array<{ text: string; imageSrc: string; imageLeft?: boolean }> }
+  | { type: "competitor-cards"; cardBg?: string; cards: Array<{ title: string; body: string; logoSrc?: string }> };
 
 export interface TocSection {
   id: string;
@@ -59,17 +65,26 @@ const midorm: CaseStudy = {
   sections: [
     {
       id: "overview",
-      label: "Overview",
-      heading: "Overview",
+      label: "Why This App?",
+      heading: "Why This App?",
       blocks: [
         {
           type: "paragraph",
-          text: "As an incoming freshman, choosing where to live can feel overwhelming. Information scattered and no easy way to compare dorms, students often rely on guesswork and word of mouth.",
+          text: "As an incoming freshman at the University of Michigan, choosing where to live can feel overwhelming. Information is scattered, there's no easy way to compare dorms, and students often rely on guesswork and word of mouth. We wanted to change that.",
+        },
+        {
+          type: "subheading",
+          text: "The Goal",
         },
         {
           type: "paragraph",
-          boldPrefix: "MiDorm",
-          text: " simplifies this by organizing key information and creating an easy way to explore and compare options to help students make informed decisions.",
+          text: "To simplify the dorm selection process by organizing key information and giving students an easy way to explore, compare, and rank their options.",
+        },
+        {
+          type: "centered-image",
+          src: "/intro.png",
+          label: "MiDorm app screens",
+          maxWidth: "100%",
         },
       ],
     },
@@ -79,26 +94,21 @@ const midorm: CaseStudy = {
       heading: "The Problem",
       blocks: [
         {
-          type: "paragraph",
-          text: "For each competitor, we examined the clarity of option presentation, the transparency of option information, and personalization.",
-          link: {
-            label: "View competitive review →",
-            href: "https://docs.google.com/document/d/1lDZNoxvxYziQn9rOfPbV4yBp19L2dNPc8-QA7ITbRro/edit?usp=sharing",
-          },
-        },
-        {
-          type: "subheading",
-          text: "Key Findings",
-        },
-        {
-          type: "finding",
-          title: "Cluttered Interfaces Make Dorm Selection Overwhelming",
-          body: "Students struggle to quickly identify dorms that meet their needs due to dense option presentation and limited visibility into dorm information.",
-        },
-        {
-          type: "finding",
-          title: "No Way to Track or Compare Preferred Dorms",
-          body: "Existing tools do not allow students to save or compare dorms they are considering. This causes students to rely on memory or external tools.",
+          type: "problem-cards",
+          cards: [
+            {
+              heading: "Scattered across too many sources",
+              body: "Dorm details are scattered across multiple university pages with no central place to compare what matters.",
+            },
+            {
+              heading: "No way to save or compare",
+              body: "Students can't track or compare dorms they're interested in — they rely on memory, screenshots, or external tools.",
+            },
+            {
+              heading: "Cluttered interfaces hide what matters",
+              body: "Existing tools overwhelm students with dense layouts and limited visibility into what each dorm actually offers.",
+            },
+          ],
         },
       ],
     },
@@ -112,20 +122,30 @@ const midorm: CaseStudy = {
           text: "After conducting this user research, we compiled our findings into a Product Vision Board. This method allowed us to capture the overall app implementation strategy and ensure that our app leveraged the strengths of the University.",
         },
         {
-          type: "image",
-          label: "Product Vision Board",
-          aspect: "4/3",
-          cols: 1,
-          caption: undefined,
-          src: "/Product%20Vision%20Board.png",
+          type: "external-link",
+          label: "View Product Vision Board →",
+          href: "/Product%20Vision%20Board.png",
         },
         {
-          type: "target-goals-pills",
-          target: "Incoming students @ University of Michigan",
-          goals: [
-            "Visual descriptions of dorms",
-            "Filtering and sorting options",
-            "Dorm ranking",
+          type: "subheading",
+          text: "Design Principles",
+        },
+        {
+          type: "problem-cards",
+          cardBg: "#FFE8D0",
+          cards: [
+            {
+              heading: "Visual descriptions of dorms",
+              body: "Give students a way to see what each dorm looks like and offers, not just read a list of names.",
+            },
+            {
+              heading: "Filtering and sorting options",
+              body: "Let students narrow down choices based on what matters to them — location, amenities, social scene.",
+            },
+            {
+              heading: "Dorm ranking",
+              body: "Allow students to build a personalized ranking so they can prioritize options based on their own preferences.",
+            },
           ],
         },
       ],
@@ -164,40 +184,21 @@ const midorm: CaseStudy = {
     {
       id: "mobile-first",
       label: "Mobile First",
-      heading: "Mobile First + Design System",
+      heading: "",
       blocks: [
         {
-          type: "paragraph",
-          text: "We followed a Mobile First approach and aligned with Apple's iOS Human Interface Guidelines, and created a design system to streamline our process.",
-        },
-        {
-          type: "video-row",
-          videos: [
-            { label: "Video 01", src: "/video 4.mov" },
-            { label: "Video 02", src: "/video 2.mov" },
-            { label: "Video 03", src: "/video 3.mov" },
-          ],
+          type: "feature-split",
+          heading: "Mobile First + Design System",
+          body: "We followed a Mobile First approach and aligned with Apple's iOS Human Interface Guidelines, and created a design system to streamline our process.",
+          videoSrc: "/video 4.mov",
         },
       ],
     },
     {
       id: "design-decisions",
-      label: "Design Decisions",
-      heading: "Design Decisions",
+      label: "The Solution",
+      heading: "The Solution",
       blocks: [
-        {
-          type: "paragraph",
-          text: "We progressed major app screens from sketches to high-fidelity prototyped wireframes.",
-        },
-        {
-          type: "subheading",
-          text: "Photo Gallery",
-          id: "photo-gallery",
-        },
-        {
-          type: "paragraph",
-          text: "Increasing visual transparency by placing a photo gallery at the top of each dorm page, featuring student-submitted images of real rooms and spaces help students make more informed decisions.",
-        },
         {
           type: "subheading",
           text: "User Testing Insights",
@@ -208,32 +209,40 @@ const midorm: CaseStudy = {
           text: "We found that our design performed as intended. All five participants were able to complete the key tasks with ease and they appreciated the level of transparency and detail provided in the dorm information.",
         },
         {
-          type: "quote",
-          text: "The filters are really easy to scroll through",
-          attribution: "Diya Sankla — Senior @ UMich",
-        },
-        {
-          type: "quote",
-          text: "I really appreciated pictures of the dorms because I didn't have that when initially going through the process",
-          attribution: "Reeva Bohra — Junior @ UMich",
-        },
-        {
-          type: "subheading",
-          text: "Revisions",
-        },
-        {
-          type: "list",
-          items: [
-            "Diverse preferences for contacting roommates outside of in-app messaging → Allowed users to share multiple third-party contact methods (email, phone number, Instagram, etc.) with their roommate",
-            "Desire for more functionality out of dorm maps → Allowed users to explore nearby campus buildings and see dorm-to-building distance estimates, following map conventions like location filters, search bars, and pinch-to-zoom gesture",
+          type: "quote-cards",
+          cardBg: "#EAE6FA",
+          cards: [
+            {
+              quote: "The filters are really easy to scroll through",
+              attribution: "— Diya Sankla — Senior @ UMich",
+            },
+            {
+              quote: "I really appreciated pictures of the dorms because I didn't have that when initially going through the process",
+              attribution: "— Reeva Bohra — Junior @ UMich",
+            },
           ],
         },
+      ],
+    },
+    {
+      id: "revisions",
+      label: "Revisions",
+      heading: "Revisions",
+      blocks: [
         {
-          type: "before-after-toggle",
-          beforeSrc: "/revision-before.png",
-          afterSrc: "/revision-after.png",
-          beforeLabel: "Original design before user testing",
-          afterLabel: "Revised design after user testing",
+          type: "revision-rows",
+          rows: [
+            {
+              text: "Diverse preferences for contacting roommates outside of in-app messaging → Allowed users to share multiple third-party contact methods (email, phone number, Instagram, etc.) with their roommate",
+              imageSrc: "/revision update-2.png",
+              imageLeft: false,
+            },
+            {
+              text: "Desire for more functionality out of dorm maps → Allowed users to explore nearby campus buildings and see dorm-to-building distance estimates",
+              imageSrc: "/revision update-2.png",
+              imageLeft: true,
+            },
+          ],
         },
       ],
     },
@@ -272,7 +281,7 @@ const midorm: CaseStudy = {
           text: "Our Approach",
         },
         {
-          type: "callout",
+          type: "paragraph",
           text: "A native app for a common U-M student problem that currently has no university-specific solution. Building within the U-M system required navigating both Apple's iOS guidelines and the University's design standards, often making tradeoffs where they conflicted. Despite these constraints, our decisions consistently prioritized user needs and expectations.",
         },
         {
@@ -280,7 +289,7 @@ const midorm: CaseStudy = {
           text: "Next Sprint",
         },
         {
-          type: "callout",
+          type: "paragraph",
           text: "In our next sprint, we would enhance visual dorm details by adding student-created video walkthroughs to build transparency and trust. We would also conduct additional user research to identify the most valuable features and guide future updates.",
         },
       ],
@@ -339,22 +348,26 @@ const microMerchantLoan: CaseStudy = {
           text: "I audited the existing lending flow screen by screen, mapping where users would drop off and why.",
         },
         {
-          type: "finding",
-          title: "Lack of Loan Awareness",
-          body: "Users didn't understand loan timelines, deductions, or required documents.",
-          borderColor: "#5A8FA8",
+          type: "subheading",
+          text: "Pain Points",
         },
         {
-          type: "finding",
-          title: "Overwhelming Landing Page",
-          body: "Text-heavy, unclear on benefits or eligibility. Users quit before even starting.",
-          borderColor: "#5A8FA8",
-        },
-        {
-          type: "finding",
-          title: "No Feedback During Wait Times",
-          body: "No progress indicators at key steps, users thought the app had frozen.",
-          borderColor: "#5A8FA8",
+          type: "problem-cards",
+          cardBg: "#E8F0E4",
+          cards: [
+            {
+              heading: "Lack of Loan Awareness",
+              body: "Users didn't understand loan timelines, deductions, or required documents.",
+            },
+            {
+              heading: "Overwhelming Landing Page",
+              body: "Text-heavy, unclear on benefits or eligibility. Users quit before even starting.",
+            },
+            {
+              heading: "No Feedback During Wait Times",
+              body: "No progress indicators at key steps, users thought the app had frozen.",
+            },
+          ],
         },
         {
           type: "image-row",
@@ -413,25 +426,25 @@ const microMerchantLoan: CaseStudy = {
           text: "I looked at how BharatPay, CRED, and PhonePe handle merchant lending to understand the current landscape.",
         },
         {
-          type: "finding",
-          title: "BharatPay",
-          body: "Quick onboarding, minimal docs, transaction-based approvals optimised for Tier 2/3 users.",
-          logoSrc: "https://www.google.com/s2/favicons?domain=bharatpe.com&sz=32",
-          borderColor: "#5A8FA8",
-        },
-        {
-          type: "finding",
-          title: "CRED",
-          body: "Animations and gamified feedback make financial actions feel light and premium.",
-          logoSrc: "https://www.google.com/s2/favicons?domain=cred.club&sz=32",
-          borderColor: "#5A8FA8",
-        },
-        {
-          type: "finding",
-          title: "PhonePe",
-          body: "Clean UI with merchant dashboard and multilingual support. Loans tied to transaction history.",
-          logoSrc: "https://www.google.com/s2/favicons?domain=phonepe.com&sz=32",
-          borderColor: "#5A8FA8",
+          type: "competitor-cards",
+          cardBg: "#FAE8E4",
+          cards: [
+            {
+              title: "BharatPay",
+              body: "Quick onboarding, minimal docs, transaction-based approvals optimised for Tier 2/3 users.",
+              logoSrc: "https://www.google.com/s2/favicons?domain=bharatpe.com&sz=32",
+            },
+            {
+              title: "CRED",
+              body: "Animations and gamified feedback make financial actions feel light and premium.",
+              logoSrc: "https://www.google.com/s2/favicons?domain=cred.club&sz=32",
+            },
+            {
+              title: "PhonePe",
+              body: "Clean UI with merchant dashboard and multilingual support. Loans tied to transaction history.",
+              logoSrc: "https://www.google.com/s2/favicons?domain=phonepe.com&sz=32",
+            },
+          ],
         },
         {
           type: "subheading",
@@ -460,22 +473,22 @@ const microMerchantLoan: CaseStudy = {
           text: "Design Principles",
         },
         {
-          type: "finding",
-          title: "Clarity over complexity",
-          body: "Plain language throughout. Never assume users know what \"tenure\" or \"EMI\" means.",
-          bg: "#DAE7F3",
-        },
-        {
-          type: "finding",
-          title: "Education upfront",
-          body: "Explain what a micro-loan is before users enter the flow.",
-          bg: "#DAE7F3",
-        },
-        {
-          type: "finding",
-          title: "Transparency builds trust",
-          body: "Show loan amount, tenure, and interest rate early before the user commits.",
-          bg: "#DAE7F3",
+          type: "problem-cards",
+          cardBg: "#F5F0E8",
+          cards: [
+            {
+              heading: "Clarity over complexity",
+              body: "Plain language throughout. Never assume users know what \"tenure\" or \"EMI\" means.",
+            },
+            {
+              heading: "Education upfront",
+              body: "Explain what a micro-loan is before users enter the flow.",
+            },
+            {
+              heading: "Transparency builds trust",
+              body: "Show loan amount, tenure, and interest rate early before the user commits.",
+            },
+          ],
         },
         {
           type: "subheading",

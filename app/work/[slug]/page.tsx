@@ -781,7 +781,7 @@ function renderBlocks(blocks: Block[]) {
     // Callout block — non-italic, distinct background
     if (b.type === "callout") {
       output.push(
-        <div key={i} className="mt-6 py-5 px-6 rounded-r-[3px]" style={{ background: b.bg ?? "var(--bg-warm)", borderLeft: b.bg ? "2px solid #5A8FA8" : "2px solid var(--ink)" }}>
+        <div key={i} className="mt-6 py-5 px-6 rounded-r-[3px]" style={{ background: b.bg ?? "#C6DCF2", borderLeft: "2px solid #5A8FA8" }}>
           <p style={{ ...T.body, fontStyle: "normal", color: "var(--ink)", lineHeight: 1.65 }}>{b.text}</p>
         </div>
       );
@@ -944,6 +944,283 @@ function renderBlocks(blocks: Block[]) {
       continue;
     }
 
+    // Centered image
+    if (b.type === "centered-image") {
+      output.push(
+        <figure key={i} className="mt-12 mb-4 centered-img-wrap" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <style>{`.centered-img-wrap img { width: ${b.maxWidth ?? "65%"}; } @media (max-width: 767px) { .centered-img-wrap img { width: 100% !important; } }`}</style>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={b.src}
+            alt={b.label}
+            style={{
+              maxWidth:  "100%",
+              height:    "auto",
+              display:   "block",
+              objectFit: "contain",
+            }}
+          />
+          {b.caption && <figcaption className="mt-2 text-center" style={T.caption}>{b.caption}</figcaption>}
+        </figure>
+      );
+      i++;
+      continue;
+    }
+
+    // Problem cards — sticky note style
+    if (b.type === "problem-cards") {
+      output.push(
+        <div key={i} className="mt-6">
+          <style>{`@media (max-width: 767px) { .problem-cards-row { flex-direction: column !important; } }`}</style>
+          <div className="problem-cards-row" style={{ display: "flex", gap: "16px", alignItems: "stretch" }}>
+            {b.cards.map((card, ci) => (
+              <div
+                key={ci}
+                style={{
+                  flex:          "1 1 0",
+                  background:    b.cardBg ?? "#FFFBEA",
+                  borderRadius:  "14px",
+                  boxShadow:     "0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                  padding:       "24px 20px",
+                  display:       "flex",
+                  flexDirection: "column",
+                  gap:           "10px",
+                }}
+              >
+                <p style={{
+                  fontFamily: "var(--font-lato)",
+                  fontWeight: 700,
+                  fontSize:   "15px",
+                  lineHeight: 1.35,
+                  color:      "#1D2B3A",
+                  margin:     0,
+                }}>
+                  {card.heading}
+                </p>
+                <p style={{
+                  fontFamily: "var(--font-lato)",
+                  fontWeight: 400,
+                  fontSize:   "14px",
+                  lineHeight: 1.65,
+                  color:      "#4A5568",
+                  margin:     0,
+                }}>
+                  {card.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
+    // Competitor cards — horizontal row, sticky-note style, icon + heading + body
+    if (b.type === "competitor-cards") {
+      output.push(
+        <div key={i} className="mt-6">
+          <style>{`@media (max-width: 767px) { .competitor-cards-row { flex-direction: column !important; } }`}</style>
+          <div className="competitor-cards-row" style={{ display: "flex", gap: "16px", alignItems: "stretch" }}>
+            {b.cards.map((card, ci) => (
+              <div
+                key={ci}
+                style={{
+                  flex:          "1 1 0",
+                  background:    b.cardBg ?? "#FAE8E4",
+                  borderRadius:  "14px",
+                  boxShadow:     "0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                  padding:       "24px 20px",
+                  display:       "flex",
+                  flexDirection: "column",
+                  gap:           "10px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  {card.logoSrc && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={card.logoSrc} alt="" width={20} height={20} style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
+                  )}
+                  <p style={{
+                    fontFamily: "var(--font-lato)",
+                    fontWeight: 700,
+                    fontSize:   "15px",
+                    lineHeight: 1.2,
+                    color:      "#1D2B3A",
+                    margin:     0,
+                  }}>
+                    {card.title}
+                  </p>
+                </div>
+                <p style={{
+                  fontFamily: "var(--font-lato)",
+                  fontWeight: 400,
+                  fontSize:   "14px",
+                  lineHeight: 1.65,
+                  color:      "#4A5568",
+                  margin:     0,
+                }}>
+                  {card.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
+    // Quote cards — sticky-note style quote blocks
+    if (b.type === "quote-cards") {
+      output.push(
+        <div key={i} className="mt-6">
+          <style>{`@media (max-width: 767px) { .quote-cards-row { flex-direction: column !important; } }`}</style>
+          <div className="quote-cards-row" style={{ display: "flex", gap: "16px", alignItems: "stretch" }}>
+            {b.cards.map((card, ci) => (
+              <div
+                key={ci}
+                style={{
+                  flex:          "1 1 0",
+                  background:    b.cardBg ?? "#EAE6FA",
+                  borderRadius:  "14px",
+                  boxShadow:     "0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                  padding:       "24px 20px",
+                  display:       "flex",
+                  flexDirection: "column",
+                  gap:           "12px",
+                }}
+              >
+                <p style={{
+                  fontFamily: "var(--font-lato)",
+                  fontStyle:  "italic",
+                  fontWeight: 400,
+                  fontSize:   "15px",
+                  lineHeight: 1.55,
+                  color:      "#1D2B3A",
+                  margin:     0,
+                }}>
+                  &ldquo;{card.quote}&rdquo;
+                </p>
+                <p style={{
+                  fontFamily: "var(--font-lato)",
+                  fontWeight: 400,
+                  fontSize:   "13px",
+                  lineHeight: 1.4,
+                  color:      "#6B7280",
+                  margin:     0,
+                }}>
+                  {card.attribution}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
+    // Revision rows — alternating text/image two-column layout
+    if (b.type === "revision-rows") {
+      output.push(
+        <div key={i}>
+          <style>{`
+            @media (max-width: 767px) {
+              .revision-row { flex-direction: column !important; gap: 24px !important; }
+              .revision-row-img { order: -1 !important; }
+            }
+          `}</style>
+          <div style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
+            {b.rows.map((row, ri) => (
+              <div
+                key={ri}
+                className="revision-row"
+                style={{
+                  display:     "flex",
+                  alignItems:  "center",
+                  gap:         "48px",
+                  flexDirection: row.imageLeft ? "row-reverse" : "row",
+                }}
+              >
+                {/* Text column */}
+                <div style={{ flex: "0 1 30%" }}>
+                  <p style={{ ...T.body, fontSize: "14px", lineHeight: 1.65 }}>{row.text}</p>
+                </div>
+                {/* Image column */}
+                <div
+                  className="revision-row-img"
+                  style={{ flex: "0 1 80%" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={row.imageSrc}
+                    alt={`Revision ${ri + 1}`}
+                    style={{ width: "100%", height: "auto", display: "block", borderRadius: "8px" }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
+    // Feature split — large heading + body left, video right
+    if (b.type === "feature-split") {
+      output.push(
+        <div key={i}>
+          <style>{`
+            @media (max-width: 767px) {
+              .feature-split-row { flex-direction: column !important; }
+              .feature-split-row .feature-split-video { width: 100% !important; align-items: center !important; }
+            }
+          `}</style>
+          <div
+            className="feature-split-row"
+            style={{ display: "flex", alignItems: "flex-start", gap: "48px" }}
+          >
+            {/* Left — text */}
+            <div style={{ flex: "0 0 42%" }}>
+              <h2 style={{ ...T.sectionHeading, marginBottom: "20px" }}>
+                {b.heading}
+              </h2>
+              <p style={T.body}>{b.body}</p>
+            </div>
+
+            {/* Right — video card */}
+            <div
+              className="feature-split-video"
+              style={{
+                flex:           "1 1 0",
+                display:        "flex",
+                justifyContent: "center",
+                alignItems:     "center",
+                background:     "#F2F2F0",
+                borderRadius:   "24px",
+                padding:        "52px 48px",
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", maxWidth: "260px", height: "auto", display: "block", borderRadius: "8px", background: "transparent" }}
+              >
+                <source src={b.videoSrc} type="video/quicktime" />
+                <source src={b.videoSrc} type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
     // Text blocks
     if (b.type === "paragraph") {
       output.push(
@@ -1008,14 +1285,14 @@ function renderBlocks(blocks: Block[]) {
               {b.num}
             </span>
           )}
-          <div className="flex items-center gap-2 mb-1.5">
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
             {b.logoSrc && (
               /* eslint-disable-next-line @next/next/no-img-element */
-              <img src={b.logoSrc} alt="" width={20} height={20} style={{ borderRadius: "4px", flexShrink: 0 }} />
+              <img src={b.logoSrc} alt="" width={20} height={20} style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
             )}
-            <p style={{ ...T.subheading, fontSize: "15px", fontWeight: 900 }}>{b.title}</p>
+            <p style={{ ...T.subheading, fontSize: "15px", fontWeight: 900, margin: 0, lineHeight: 1.2 }}>{b.title}</p>
           </div>
-          <p style={{ ...T.body, fontSize: "14px", color: "var(--ink)" }}>{b.body}</p>
+          <p style={{ ...T.body, fontSize: "14px", color: "var(--ink)", margin: 0 }}>{b.body}</p>
           {b.reasoning && (
             <p style={{ fontFamily: "var(--font-lato)", fontStyle: "italic", fontWeight: 300, fontSize: "14px", color: b.bg ? "var(--ink)" : "#666", lineHeight: 1.6, marginTop: "8px" }}>
               {b.reasoning}
@@ -1233,9 +1510,11 @@ export default function WorkPage() {
                         </PhoneWrapper>
                       </div>
                     )}
-                    <h2 style={T.sectionHeading} className="mb-6">
-                      {section.heading}
-                    </h2>
+                    {section.heading && (
+                      <h2 style={T.sectionHeading} className="mb-6">
+                        {section.heading}
+                      </h2>
+                    )}
                     {renderBlocks(section.blocks)}
                   </section>
                 );
