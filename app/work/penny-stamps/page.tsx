@@ -371,7 +371,7 @@ export default function PennyStampsPage() {
           src="/Building Staircase Mockup.png"
           alt="Building staircase mockup"
           className="w-full md:w-1/2"
-          style={{ height: "560px", objectFit: "cover", objectPosition: "center", display: "block" }}
+          style={{ height: "560px", objectFit: "cover", objectPosition: "center 30%", display: "block" }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

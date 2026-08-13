@@ -6,8 +6,13 @@ export default function Hero() {
           0%, 100% { transform: rotate(-2deg); }
           50%       { transform: rotate(2deg);  }
         }
+        @keyframes hero-fade-in {
+          from { opacity: 0; transform: rotate(-2deg) translateY(20px); }
+          to   { opacity: 1; transform: rotate(-2deg) translateY(0); }
+        }
         .hero-img {
-          animation: hero-rock 4.5s ease-in-out infinite;
+          animation: hero-fade-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                     hero-rock 4.5s ease-in-out 0.9s infinite;
         }
         @media (max-width: 767px) {
           .hero-img {
@@ -41,11 +46,11 @@ export default function Hero() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/about me hero - updated.png"
+          src="/new hero.png"
           alt="Hi! I'm Neha — visual designer"
           className="hero-img"
           style={{
-            width:        "clamp(320px, 55vw, 720px)",
+            width:        "clamp(300px, 52vw, 680px)",
             height:       "auto",
             display:      "block",
             objectFit:    "contain",
@@ -64,7 +69,7 @@ export default function Hero() {
             letterSpacing: "-0.01em",
             lineHeight:    "1.25",
             margin:        "0",
-            marginTop:     "-150px",
+            marginTop:     "-40px",
             paddingBottom: "56px",
             paddingLeft:   "24px",
             paddingRight:  "24px",
