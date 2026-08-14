@@ -95,7 +95,7 @@ function ProjectCard({
 export default function ProjectList() {
   return (
     <section id="work" style={{ background: "var(--bg)" }}>
-      <div className="px-10 lg:px-14 pt-2 pb-16 md:pt-4 md:pb-20">
+      <div className="px-6 md:px-10 lg:px-14 pt-2 pb-16 md:pt-4 md:pb-20">
 
         {/* 2-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 md:gap-x-10 gap-y-16 md:gap-y-20">

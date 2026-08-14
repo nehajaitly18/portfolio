@@ -92,7 +92,13 @@ export default function ElvisPresleyPage() {
 
   return (
     <>
-    <style>{`@media (max-width: 767px) { .elvis-page { margin-top: -56px !important; } }`}</style>
+    <style>{`
+      @media (max-width: 767px) {
+        .elvis-page { margin-top: -56px !important; }
+        .elvis-spread-pair { flex-direction: column !important; gap: 0 !important; }
+        .elvis-spread-pair > img { width: 100% !important; }
+      }
+    `}</style>
     <motion.div className="elvis-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
       <BackButton />
 
@@ -112,6 +118,27 @@ export default function ElvisPresleyPage() {
 
       {/* ── 2. Title + Text Section ───────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-16 pb-16">
+
+        <a
+          href="/"
+          onClick={handleBack}
+          style={{
+            fontFamily:     "var(--font-lato)",
+            fontSize:       "15px",
+            letterSpacing:  "0.12em",
+            textTransform:  "uppercase",
+            color:          "var(--ink-4)",
+            opacity:        0.38,
+            display:        "inline-block",
+            textDecoration: "none",
+            marginBottom:   "32px",
+            paddingTop:     "8px",
+            paddingBottom:  "8px",
+          }}
+          className="lg:hidden hover:opacity-70 transition-opacity duration-200"
+        >
+          ← Work
+        </a>
 
         <h1 style={{ ...T.projectTitle, marginBottom: "10px" }}>
           Elvis Presley&rsquo;s Albums and the Stories They Told
@@ -151,7 +178,7 @@ export default function ElvisPresleyPage() {
       </div>
 
       {/* ── 3. Spread 1 & 2 — full-bleed, side by side ──────── */}
-      <div style={{ display: "flex", width: "100%", maxWidth: "100vw", gap: "24px" }}>
+      <div className="elvis-spread-pair" style={{ display: "flex", width: "100%", maxWidth: "100vw", gap: "24px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/loop 2.png"

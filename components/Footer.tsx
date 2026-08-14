@@ -9,7 +9,8 @@ export default function Footer() {
         style={{
           maxWidth:       "1200px",
           margin:         "0 auto",
-          padding:        "72px 80px",
+          paddingTop:     "64px",
+          paddingBottom:  "64px",
           display:        "flex",
           flexWrap:       "wrap",
           alignItems:     "flex-start",

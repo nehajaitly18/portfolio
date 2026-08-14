@@ -10,13 +10,17 @@ import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 
 export const metadata: Metadata = {
   title: "Neha Jaitly — Visual Designer",
-  description:
-    "Portfolio of Neha Jaitly, a visual designer balancing aesthetics and usability across branding, interfaces, and digital products.",
+  description: "Branding, interfaces, and digital products.",
   openGraph: {
     title: "Neha Jaitly — Visual Designer",
-    description: "Portfolio of Neha Jaitly, visual designer.",
+    description: "Branding, interfaces, and digital products.",
     url: "https://nehajaitly.com",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neha Jaitly — Visual Designer",
+    description: "Branding, interfaces, and digital products.",
   },
 };
 

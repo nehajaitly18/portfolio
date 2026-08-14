@@ -368,12 +368,19 @@ export default function AboutPage() {
     <div style={{ background: "var(--bg)", minHeight: "100vh" }}>
 
       {/* ── Full-screen hero image ─────────────────────────── */}
-      <div style={{ display: "flex", justifyContent: "center", padding: "32px 24px 0" }}>
+      <style>{`
+        @media (max-width: 767px) {
+          .about-hero-wrap { padding-left: 0 !important; padding-right: 0 !important; }
+          .about-hero-img  { width: 90% !important; }
+        }
+      `}</style>
+      <div className="about-hero-wrap" style={{ display: "flex", justifyContent: "center", padding: "32px 24px 0" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <motion.img
           key={pathname}
           src="/08.png"
           alt=""
+          className="about-hero-img"
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           animate={imgReady ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}

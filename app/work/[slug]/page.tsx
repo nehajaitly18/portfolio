@@ -891,7 +891,7 @@ function renderBlocks(blocks: Block[]) {
       output.push(
         <div key={i} className="mt-8">
           {b.src ? (
-            <div style={{ maxWidth: "70%", margin: "0 auto" }}>
+            <div className="cs-single-video" style={{ maxWidth: "70%", margin: "0 auto" }}>
               <video
                 autoPlay
                 loop
@@ -1424,6 +1424,7 @@ export default function WorkPage() {
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
     >
     <motion.div className="bg-[var(--bg)]" animate={controls}>
+      <style>{`@media (max-width: 767px) { .cs-single-video { max-width: 90% !important; } }`}</style>
 
       {/* ── Hero image — full width ───────────────────────────── */}
       {caseStudy.heroImage.src ? (
@@ -1478,7 +1479,7 @@ export default function WorkPage() {
                 <a
                   href="/"
                   onClick={handleBack}
-                  style={{ ...T.mono, textDecoration: "none" }}
+                  style={{ ...T.mono, textDecoration: "none", paddingTop: "10px", paddingBottom: "10px" }}
                   className="inline-flex items-center gap-2 mb-8 lg:hidden hover:text-[var(--ink-3)] transition-colors cursor-pointer"
                 >
                   ← Work

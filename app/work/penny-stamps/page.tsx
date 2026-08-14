@@ -134,6 +134,8 @@ export default function PennyStampsPage() {
             display:        "inline-block",
             textDecoration: "none",
             marginBottom:   "32px",
+            paddingTop:     "8px",
+            paddingBottom:  "8px",
           }}
           className="lg:hidden hover:opacity-70 transition-opacity duration-200"
         >

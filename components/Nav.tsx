@@ -65,6 +65,11 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   /* Staggered bounce-in on first intersection */
   useEffect(() => {
     const el = nameRef.current;
@@ -160,42 +165,43 @@ export default function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-[45] bg-white flex flex-col justify-center px-8 md:hidden"
+            className="fixed top-0 left-0 right-0 bottom-0 z-[45] bg-white flex flex-col justify-center px-8 md:hidden"
+            style={{ minHeight: "100dvh" }}
           >
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col items-center gap-8">
               {[
                 { href: "/#work", label: "Work"  },
                 { href: "/about",  label: "About" },
               ].map(({ href, label }, i) => (
                 <motion.div
                   key={href}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.4 }}
                 >
                   <Link
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className="text-4xl font-light tracking-tight not-italic"
-                    style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal' }}
+                    className="font-light tracking-tight not-italic"
+                    style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal', fontSize: '22px' }}
                   >
                     {label}
                   </Link>
                 </motion.div>
               ))}
               <motion.div
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18, duration: 0.4 }}
               >
                 <a
                   href="https://drive.google.com/file/d/15KAo-F76DlpTJd1CSJuGZXczB2D-Dntl/view?usp=share_link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-4xl font-light tracking-tight not-italic"
-                  style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal' }}
+                  className="font-light tracking-tight not-italic"
+                  style={{ fontFamily: 'var(--font-lato)', fontStyle: 'normal', fontSize: '22px' }}
                 >
-                  Resume ↗
+                  Resume
                 </a>
               </motion.div>
             </div>
