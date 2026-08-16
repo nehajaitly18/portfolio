@@ -200,7 +200,7 @@ export default function ElvisFlipbook() {
 
         <span
           style={{
-            fontFamily:    "var(--font-geist-mono)",
+            fontFamily:    "var(--font-lato)",
             fontSize:      "11px",
             letterSpacing: "0.18em",
             textTransform: "uppercase",
@@ -247,7 +247,7 @@ export default function ElvisFlipbook() {
         download="Elvis-Presley-Publication.pdf"
         style={{
           marginTop:     "20px",
-          fontFamily:    "var(--font-geist-mono)",
+          fontFamily:    "var(--font-lato)",
           fontSize:      "10px",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
@@ -264,7 +264,7 @@ export default function ElvisFlipbook() {
       <p
         style={{
           marginTop:     "10px",
-          fontFamily:    "var(--font-geist-mono)",
+          fontFamily:    "var(--font-lato)",
           fontSize:      "10px",
           letterSpacing: "0.12em",
           color:         "var(--ink-4)",

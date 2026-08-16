@@ -45,7 +45,7 @@ export const projects: Project[] = [
     index: "03",
     title: "Steamy Sips",
     category: "Visual Branding & Identity",
-    year: "2024",
+    year: "2026",
     description: "Visual branding and identity system for Steamy Sips — a cohesive brand language built around warmth, ritual, and sensory detail.",
     tags: ["Branding", "Identity", "Visual Design"],
     href: "/work/steamy-sips",

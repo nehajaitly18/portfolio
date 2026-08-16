@@ -1319,7 +1319,7 @@ function renderBlocks(blocks: Block[]) {
       output.push(
         <blockquote key={i} className="mt-8 pl-6 border-l-2 border-[var(--ink)] py-1">
           <p style={{
-            fontFamily:    "var(--font-playfair)",
+            fontFamily:    "Georgia, serif",
             fontStyle:     "normal",
             fontWeight:    400,
             fontSize:      "18px",

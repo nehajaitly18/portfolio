@@ -10,17 +10,17 @@ import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 
 export const metadata: Metadata = {
   title: "Neha Jaitly — Visual Designer",
-  description: "Branding, interfaces, and digital products.",
+  description: "Design Portfolio",
   openGraph: {
     title: "Neha Jaitly — Visual Designer",
-    description: "Branding, interfaces, and digital products.",
+    description: "Design Portfolio",
     url: "https://nehajaitly.com",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Neha Jaitly — Visual Designer",
-    description: "Branding, interfaces, and digital products.",
+    description: "Design Portfolio",
   },
 };
 
@@ -36,7 +36,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#111110" />
-        <link rel="icon" type="image/png" href="/favicon-n.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="apple-touch-icon" href="/favicon-n.png" />
         <link rel="stylesheet" href="https://use.typekit.net/zsw4dlb.css" />
       </head>

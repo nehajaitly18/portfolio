@@ -178,7 +178,7 @@ function SuitsCard() {
       gap: 6, padding: 16,
     }}>
       <p style={{
-        fontSize: 26, fontFamily: "var(--font-playfair)", fontWeight: 400, fontStyle: "italic",
+        fontSize: 26, fontFamily: "Georgia, serif", fontWeight: 400, fontStyle: "italic",
         color: "#FFFFFF", margin: 0, letterSpacing: "0.14em",
       }}>
         SUITS
@@ -246,7 +246,7 @@ function ExperienceRow({
           {String(index + 1).padStart(2, "0")}
         </span>
         <span style={{
-          fontFamily: "var(--font-inter)",
+          fontFamily: "var(--font-lato)",
           fontSize:   16,
           fontWeight: 400,
           color:      "var(--ink)",
@@ -257,7 +257,7 @@ function ExperienceRow({
         <span
           className="hidden sm:inline"
           style={{
-            fontFamily: "var(--font-inter)",
+            fontFamily: "var(--font-lato)",
             fontSize:   13,
             color:      "var(--ink-3)",
             minWidth:   140,

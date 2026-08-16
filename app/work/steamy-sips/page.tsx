@@ -309,7 +309,7 @@ export default function SteamySipsPage() {
             lineHeight:    1.6,
             marginTop:     "8px",
           }}>
-            Adobe Illustrator, Photoshop · 2024
+            Adobe Illustrator, Photoshop · 2026
           </p>
         </div>
 
