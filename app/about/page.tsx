@@ -355,7 +355,7 @@ export default function AboutPage() {
   useEffect(() => {
     setImgReady(false);
     const img = new window.Image();
-    img.src = "/08.png";
+    img.src = "/about me hero updated.png";
     const show = () => requestAnimationFrame(() => requestAnimationFrame(() => setImgReady(true)));
     if (img.complete) {
       show();
@@ -378,7 +378,7 @@ export default function AboutPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <motion.img
           key={pathname}
-          src="/08.png"
+          src="/about me hero updated.png"
           alt=""
           className="about-hero-img"
           initial={{ clipPath: "inset(0 100% 0 0)" }}
