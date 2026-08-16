@@ -102,15 +102,16 @@ function LoyaltyCardSection() {
   return (
     <section
       ref={sectionRef}
+      className="steamy-loyalty-section"
       style={{
         position:        "relative",
         width:           "100%",
-        height:          "90vh",
+        minHeight:       "90vh",
         overflow:        "hidden",
         display:         "flex",
         alignItems:      "center",
         justifyContent:  "center",
-        padding:         "0 32px",
+        padding:         "64px 32px",
       }}
     >
       <style>{`
@@ -121,7 +122,10 @@ function LoyaltyCardSection() {
         @media (max-width: 640px) {
           .steamy-card-pair {
             flex-direction: column !important;
-            gap: 20px !important;
+            gap: 24px !important;
+          }
+          .steamy-loyalty-section {
+            padding: 48px 20px !important;
           }
         }
       `}</style>
@@ -330,18 +334,20 @@ export default function SteamySipsPage() {
       </div>
 
       {/* Cup duo — 50/50, full width, no gap */}
-      <div style={{ display: "flex", width: "100%" }}>
+      <div className="flex flex-col sm:flex-row w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/paper cup.png"
           alt="Steamy Sips paper cup"
-          style={{ width: "50%", height: "auto", display: "block", objectFit: "cover" }}
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/coffee plastic cup.png"
           alt="Steamy Sips plastic cup"
-          style={{ width: "50%", height: "auto", display: "block", objectFit: "cover" }}
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
       </div>
 
@@ -349,18 +355,20 @@ export default function SteamySipsPage() {
       <LoyaltyCardSection />
 
       {/* Menu mockup duo — 50/50, full width, no gap */}
-      <div style={{ display: "flex", width: "100%" }}>
+      <div className="flex flex-col sm:flex-row w-full">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/menu mockup- front face.png"
           alt="Steamy Sips menu mockup front face"
-          style={{ width: "50%", height: "auto", display: "block", objectFit: "cover" }}
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/cup  menu.png"
           alt="Steamy Sips cup and menu"
-          style={{ width: "50%", height: "auto", display: "block", objectFit: "cover" }}
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
       </div>
 
