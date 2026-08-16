@@ -317,19 +317,61 @@ export default function SteamySipsPage() {
         <section className="mt-14 pt-2" style={{ scrollMarginTop: "100px" }}>
           <h2 style={T.sectionHeading} className="mb-6">The Concept</h2>
           <p style={T.body} className="mt-5">
-            I&apos;ve always loved coffee — and always wanted to design a coffee shop of my own, even if just on paper. Steamy Sips was a chance to build a full visual identity from scratch, outside of product and UX work, just for the joy of it: a name, a personality, and a look that felt warm, a little retro, and unmistakably its own.
+            Steamy Sips is a self-directed coffee shop identity built around bold lettering and a dark olive and cream palette. The name plays on steam rising off a fresh cup, which became the starting point for the logo mark. The goal was a brand that felt strong and confident but still warm.
           </p>
         </section>
 
         {/* Logo Ideation section */}
         <section className="mt-16 pt-2" style={{ scrollMarginTop: "100px" }}>
-          <h2 style={T.sectionHeading} className="mb-8">Logo Ideation</h2>
+          <h2 style={T.sectionHeading} className="mb-8">Ideation</h2>
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo 1.png"
+              alt="Steamy Sips logo sketches"
+              className="w-full sm:w-2/5"
+              style={{ height: "auto", display: "block" }}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/color-1.png"
+              alt="Steamy Sips colour explorations"
+              className="w-full sm:w-3/5"
+              style={{ height: "auto", display: "block" }}
+            />
+          </div>
+        </section>
+
+        {/* Brand Identity section */}
+        <section className="mt-16 pt-2" style={{ scrollMarginTop: "100px" }}>
+          <h2 style={T.sectionHeading} className="mb-8">Brand Identity</h2>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/steamy sips-1.png"
-            alt="Steamy Sips logo ideation"
-            style={{ width: "100%", height: "auto", display: "block" }}
+            src="/logo variations.png"
+            alt="Steamy Sips logo variations"
+            style={{ width: "90%", height: "auto", display: "block" }}
           />
+          <div className="flex flex-col sm:flex-row gap-6 mt-10" style={{ alignItems: "stretch" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/color code.png"
+              alt="Steamy Sips colour palette"
+              className="w-full sm:w-[52%]"
+              style={{ height: "auto", display: "block" }}
+            />
+            <div className="w-full sm:w-[48%]" style={{ display: "flex", alignItems: "center" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/font type.png"
+                alt="Steamy Sips typography"
+                className="w-full sm:w-auto sm:h-full"
+                style={{ display: "block", maxWidth: "100%" }}
+              />
+            </div>
+          </div>
+          <p style={T.body} className="mt-8">
+            Olive green became the palette's base because it felt earthy and grounded rather than sweet, and held up cleanly against cream across every application. The wordmark started from an existing display font however modified it to feel more custom.
+          </p>
         </section>
       </div>
 
@@ -379,6 +421,24 @@ export default function SteamySipsPage() {
           src="/menu on image.png"
           alt="Steamy Sips menu cards"
           style={{ width: "100%", height: "auto", display: "block" }}
+        />
+      </div>
+
+      {/* Front sign + cup holder — 50/50, full width */}
+      <div className="flex flex-col sm:flex-row w-full">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/front sign.png"
+          alt="Steamy Sips front sign"
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block" }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/cup holder.png"
+          alt="Steamy Sips cup holder"
+          className="w-full sm:w-1/2"
+          style={{ height: "auto", display: "block" }}
         />
       </div>
     </div>

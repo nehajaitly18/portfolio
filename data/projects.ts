@@ -50,7 +50,7 @@ export const projects: Project[] = [
     tags: ["Branding", "Identity", "Visual Design"],
     href: "/work/steamy-sips",
     thumbClass: "project-thumb-3",
-    image: "/cup holder.png",
+    image: "/glass sign updated.png",
   },
   {
     id: "la-raza",
