@@ -194,6 +194,24 @@ test.describe("About page", () => {
   });
 });
 
+// ─── Mobile navbar opacity ────────────────────────────────────
+test.describe("Mobile nav — opaque on scroll", () => {
+  test("header background stays fully opaque on mobile after scroll", async ({ browser }) => {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await ctx.newPage();
+    await page.goto("/");
+    await page.waitForTimeout(1000);
+    await page.evaluate(() => window.scrollBy(0, 200));
+    await page.waitForTimeout(600);
+    const bg = await page.locator("header").evaluate(
+      (el) => window.getComputedStyle(el).backgroundColor
+    );
+    // Must be fully opaque white — no rgba with alpha < 1
+    expect(bg).toBe("rgb(255, 255, 255)");
+    await ctx.close();
+  });
+});
+
 // ─── Design system tokens ─────────────────────────────────────
 test.describe("Design tokens", () => {
   test("--bg is white (#FFFFFF)", async ({ page }) => {
