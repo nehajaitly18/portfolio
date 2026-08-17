@@ -192,6 +192,14 @@ a {
   animation: letter-bounce-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
+/* ─── Safe-area-aware main padding (accounts for notch / Dynamic Island) ── */
+.main-content {
+  padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
+}
+@media (min-width: 768px) {
+  .main-content { padding-top: 4rem; }
+}
+
 /* ─── Project placeholder thumbnails ─────────────────────── */
 .project-thumb-1 { background: #E8E4DC; }
 .project-thumb-2 { background: #DDE0E8; }
