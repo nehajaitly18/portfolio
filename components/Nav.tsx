@@ -98,7 +98,7 @@ export default function Nav() {
       <header
         className={cn(
           "nav-header fixed top-0 left-0 right-0 z-[100] bg-white transition-all duration-500",
-          scrolled && "backdrop-blur-md bg-white/92"
+          scrolled && "md:backdrop-blur-md md:bg-white/92"
         )}
       >
         {/* Mobile */}
