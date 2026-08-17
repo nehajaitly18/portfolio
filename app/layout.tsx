@@ -43,7 +43,7 @@ export default function RootLayout({
         <Cursor />
         <ScrollProgress />
         <Nav />
-        <main className="flex-1 pt-14 md:pt-16">
+        <main className="flex-1 pt-14 md:pt-16 isolate">
           <PageTransitionWrapper>{children}</PageTransitionWrapper>
         </main>
         <Footer />
