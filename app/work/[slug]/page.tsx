@@ -500,6 +500,8 @@ function renderBlocks(blocks: Block[]) {
           <img
             src="/youtube.png"
             alt="YouTube comments — translated from Hindi"
+            loading="lazy"
+            decoding="async"
             style={{
               width:     "75vw",
               height:    "auto",
@@ -540,7 +542,7 @@ function renderBlocks(blocks: Block[]) {
                       {/* Image — left side */}
                       <div style={{ flex: "3 1 0", minWidth: "200px" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={card.image.src} alt={card.image.alt} style={{ width: "100%", height: "auto", display: "block", borderRadius: "4px" }} />
+                        <img src={card.image.src} alt={card.image.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", display: "block", borderRadius: "4px" }} />
                       </div>
                       {/* Annotations — right side */}
                       <div style={{ flex: "2 1 0", minWidth: "200px", display: "flex", flexDirection: "column", gap: "20px", paddingTop: "8px" }}>
@@ -565,7 +567,7 @@ function renderBlocks(blocks: Block[]) {
                         {card.images.map((img, ii) => (
                           <div key={ii} style={{ borderRadius: "4px", overflow: "visible" }}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={img.src} alt={img.alt} style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }} />
+                            <img src={img.src} alt={img.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "auto", objectFit: "contain", display: "block" }} />
                           </div>
                         ))}
                       </div>
@@ -1054,7 +1056,7 @@ function renderBlocks(blocks: Block[]) {
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   {card.logoSrc && (
                     /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={card.logoSrc} alt="" width={20} height={20} style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
+                    <img src={card.logoSrc} alt="" width={20} height={20} loading="lazy" decoding="async" style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
                   )}
                   <p style={{
                     fontFamily: "var(--font-lato)",
@@ -1303,7 +1305,7 @@ function renderBlocks(blocks: Block[]) {
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
             {b.logoSrc && (
               /* eslint-disable-next-line @next/next/no-img-element */
-              <img src={b.logoSrc} alt="" width={20} height={20} style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
+              <img src={b.logoSrc} alt="" width={20} height={20} loading="lazy" decoding="async" style={{ borderRadius: "4px", flexShrink: 0, display: "block" }} />
             )}
             <p style={{ ...T.subheading, fontSize: "15px", fontWeight: 900, margin: 0, lineHeight: 1.2 }}>{b.title}</p>
           </div>

@@ -164,7 +164,7 @@ export default function Footer() {
             >
               neha
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/star.png" alt="" aria-hidden="true" style={{ width: "28px", height: "28px", objectFit: "contain", display: "block", flexShrink: 0 }} />
+              <img src="/star.png" alt="" aria-hidden="true" loading="lazy" decoding="async" style={{ width: "28px", height: "28px", objectFit: "contain", display: "block", flexShrink: 0 }} />
             </span>
           </div>
 

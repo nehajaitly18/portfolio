@@ -80,7 +80,7 @@ function VinylCard() {
       borderRadius: 3,
       isolation: "isolate",
     }}>
-      <Image src="/music.jpeg" alt="Now playing" fill style={{ objectFit: "cover" }} />
+      <Image src="/music.jpeg" alt="Now playing" fill sizes="140px" priority style={{ objectFit: "cover" }} />
       <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.48)" }} />
       <div style={{
         position: "absolute", inset: 0,
@@ -378,6 +378,8 @@ export default function AboutPage() {
       <div className="about-hero-wrap" style={{ display: "flex", justifyContent: "center", padding: "32px 24px 0" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <motion.img
+          // eslint-disable-next-line react/no-unknown-property
+          fetchPriority="high"
           key={pathname}
           src="/about me hero updated.png"
           alt=""

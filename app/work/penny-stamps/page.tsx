@@ -51,6 +51,8 @@ function IconCycler() {
             <img
               src={src}
               alt={`Icon set ${i + 1}`}
+              loading="lazy"
+              decoding="async"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
           </div>
@@ -109,6 +111,7 @@ export default function PennyStampsPage() {
       <img
         src="/1.png"
         alt="Stamps Wayfinding — hero"
+        fetchPriority="high"
         style={{
           display:         "block",
           width:           "100%",
@@ -193,6 +196,8 @@ export default function PennyStampsPage() {
         <img
           src="/stamps problem.png"
           alt="Problem — existing signage"
+          loading="lazy"
+          decoding="async"
           className="hidden md:block"
           style={{ width: "calc(100% + 20px)", height: "auto", marginTop: "40px", marginLeft: "-20px" }}
         />
@@ -200,6 +205,8 @@ export default function PennyStampsPage() {
         <img
           src="/stamps problem phone.png"
           alt="Problem — existing signage"
+          loading="lazy"
+          decoding="async"
           className="block md:hidden w-full"
           style={{ height: "auto", marginTop: "40px" }}
         />
@@ -329,6 +336,8 @@ export default function PennyStampsPage() {
           <img
             src="/icons labelled.png"
             alt="Wayfinding icons labelled"
+            loading="lazy"
+            decoding="async"
             className="w-full md:w-1/2"
             style={{ height: "auto", display: "block" }}
           />
@@ -346,6 +355,8 @@ export default function PennyStampsPage() {
         <img
           src="/icon final.png"
           alt="Icon final"
+          loading="lazy"
+          decoding="async"
           className="w-full md:w-1/2"
           style={{ height: "560px", objectFit: "cover", display: "block" }}
         />
@@ -353,6 +364,8 @@ export default function PennyStampsPage() {
         <img
           src="/abc.png"
           alt="ABC signage"
+          loading="lazy"
+          decoding="async"
           className="w-full md:w-1/2"
           style={{ height: "560px", objectFit: "cover", display: "block" }}
         />
@@ -363,6 +376,8 @@ export default function PennyStampsPage() {
       <img
         src="/after map.png"
         alt="Wayfinding map"
+        loading="lazy"
+        decoding="async"
         style={{ display: "block", width: "100%", height: "auto" }}
       />
 
@@ -372,6 +387,8 @@ export default function PennyStampsPage() {
         <img
           src="/Building Staircase Mockup.png"
           alt="Building staircase mockup"
+          loading="lazy"
+          decoding="async"
           className="w-full md:w-1/2"
           style={{ height: "560px", objectFit: "cover", objectPosition: "center 30%", display: "block" }}
         />
@@ -379,6 +396,8 @@ export default function PennyStampsPage() {
         <img
           src="/texture.png"
           alt="Signage texture detail"
+          loading="lazy"
+          decoding="async"
           className="w-full md:w-1/2"
           style={{ height: "560px", objectFit: "cover", display: "block" }}
         />

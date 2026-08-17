@@ -163,6 +163,8 @@ function FontReveal() {
           ref={imgRef}
           src="/font.png"
           alt="Zine typeface — full alphabet"
+          loading="lazy"
+          decoding="async"
           style={{
             display:  "block",
             width:    "100%",
@@ -204,6 +206,7 @@ export default function LaRazaPage() {
       <img
         src="/zine front %2B spread.png"
         alt="ABC's of Chicano Movement — hero"
+        fetchPriority="high"
         style={{
           display:    "block",
           width:      "100%",
@@ -351,6 +354,8 @@ export default function LaRazaPage() {
               key={src}
               src={src}
               alt={`Zine spread ${i + 1}`}
+              loading="lazy"
+              decoding="async"
               style={{
                 display:   "block",
                 flex:      "1 1 0",

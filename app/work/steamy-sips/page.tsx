@@ -137,6 +137,8 @@ function LoyaltyCardSection() {
         src="/espresso.jpg"
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         style={{
           position:       "absolute",
           inset:          0,
@@ -187,6 +189,8 @@ function LoyaltyCardSection() {
             <img
               src="/loyalty frot.png"
               alt="Steamy Sips loyalty card — front"
+              loading="lazy"
+              decoding="async"
               style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
             />
           </div>
@@ -209,6 +213,8 @@ function LoyaltyCardSection() {
           <img
             src="/loyalty card.png"
             alt="Steamy Sips loyalty card — buy 7 and the 8th is on us"
+            loading="lazy"
+            decoding="async"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
 
@@ -235,6 +241,8 @@ function LoyaltyCardSection() {
                   <img
                     src="/stamp.png"
                     alt={`Stamp ${i + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: "100%", height: "auto", display: "block" }}
                   />
                 </div>
@@ -248,6 +256,8 @@ function LoyaltyCardSection() {
                 <img
                   src="/loyalty font.png"
                   alt="On us!"
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: "100%", height: "auto", display: "block" }}
                 />
               </div>
@@ -278,6 +288,7 @@ export default function SteamySipsPage() {
         <img
           src="/plastic cup hero.png"
           alt="Steamy Sips — plastic cup hero"
+          fetchPriority="high"
           style={{ width: "100%", height: "auto", display: "block", objectFit: "contain", marginTop: "-5%" }}
         />
       </div>
@@ -330,6 +341,8 @@ export default function SteamySipsPage() {
             <img
               src="/logo 1.png"
               alt="Steamy Sips logo sketches"
+              loading="lazy"
+              decoding="async"
               className="w-full sm:w-2/5"
               style={{ height: "auto", display: "block" }}
             />
@@ -337,6 +350,8 @@ export default function SteamySipsPage() {
             <img
               src="/color-1.png"
               alt="Steamy Sips colour explorations"
+              loading="lazy"
+              decoding="async"
               className="w-full sm:w-3/5"
               style={{ height: "auto", display: "block" }}
             />
@@ -350,6 +365,8 @@ export default function SteamySipsPage() {
           <img
             src="/logo variations.png"
             alt="Steamy Sips logo variations"
+            loading="lazy"
+            decoding="async"
             style={{ width: "90%", height: "auto", display: "block" }}
           />
           <div className="flex flex-col sm:flex-row gap-6 mt-10" style={{ alignItems: "stretch" }}>
@@ -357,6 +374,8 @@ export default function SteamySipsPage() {
             <img
               src="/color code.png"
               alt="Steamy Sips colour palette"
+              loading="lazy"
+              decoding="async"
               className="w-full sm:w-[52%]"
               style={{ height: "auto", display: "block" }}
             />
@@ -365,6 +384,8 @@ export default function SteamySipsPage() {
               <img
                 src="/font type.png"
                 alt="Steamy Sips typography"
+                loading="lazy"
+                decoding="async"
                 className="w-full sm:w-auto sm:h-full"
                 style={{ display: "block", maxWidth: "100%" }}
               />
@@ -382,6 +403,8 @@ export default function SteamySipsPage() {
         <img
           src="/paper cup.png"
           alt="Steamy Sips paper cup"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
@@ -389,6 +412,8 @@ export default function SteamySipsPage() {
         <img
           src="/coffee plastic cup.png"
           alt="Steamy Sips plastic cup"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
@@ -403,6 +428,8 @@ export default function SteamySipsPage() {
         <img
           src="/menu mockup- front face.png"
           alt="Steamy Sips menu mockup front face"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
@@ -410,6 +437,8 @@ export default function SteamySipsPage() {
         <img
           src="/cup  menu.png"
           alt="Steamy Sips cup and menu"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block", objectFit: "cover" }}
         />
@@ -421,6 +450,8 @@ export default function SteamySipsPage() {
         <img
           src="/menu on image.png"
           alt="Steamy Sips menu cards"
+          loading="lazy"
+          decoding="async"
           style={{ width: "100%", height: "auto", display: "block" }}
         />
       </div>
@@ -431,6 +462,8 @@ export default function SteamySipsPage() {
         <img
           src="/front sign.png"
           alt="Steamy Sips front sign"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block" }}
         />
@@ -438,6 +471,8 @@ export default function SteamySipsPage() {
         <img
           src="/cup holder.png"
           alt="Steamy Sips cup holder"
+          loading="lazy"
+          decoding="async"
           className="w-full sm:w-1/2"
           style={{ height: "auto", display: "block" }}
         />

@@ -59,6 +59,7 @@ export default function MichiganArtsPage() {
         <img
           src="/arts hero.png"
           alt="Michigan Arts Initiative — hero"
+          fetchPriority="high"
           style={{
             display:   "block",
             width:     "100%",
@@ -158,6 +159,8 @@ export default function MichiganArtsPage() {
           <img
             src="/arts 2.png"
             alt="Michigan Arts poster spread 1"
+            loading="lazy"
+            decoding="async"
             className="w-full md:w-1/2"
             style={{ height: "auto", display: "block", objectFit: "contain" }}
           />
@@ -165,6 +168,8 @@ export default function MichiganArtsPage() {
           <img
             src="/arts 3.png"
             alt="Michigan Arts poster spread 2"
+            loading="lazy"
+            decoding="async"
             className="w-full md:w-1/2"
             style={{ height: "auto", display: "block", objectFit: "contain" }}
           />
@@ -177,6 +182,8 @@ export default function MichiganArtsPage() {
           <img
             src="/first 3 mockup.png"
             alt="Michigan Arts posters 1–3 mockup"
+            loading="lazy"
+            decoding="async"
             className="w-full md:w-1/2"
             style={{ height: "560px", objectFit: "cover", display: "block" }}
           />
@@ -184,6 +191,8 @@ export default function MichiganArtsPage() {
           <img
             src="/last 3.png"
             alt="Michigan Arts posters 4–6 mockup"
+            loading="lazy"
+            decoding="async"
             className="w-full md:w-1/2"
             style={{ height: "560px", objectFit: "cover", display: "block" }}
           />

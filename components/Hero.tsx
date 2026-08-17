@@ -49,6 +49,7 @@ export default function Hero() {
         <img
           src="/new hero.png"
           alt="Hi! I'm Neha — visual designer"
+          fetchPriority="high"
           className="hero-img"
           style={{
             width:        "clamp(300px, 52vw, 680px)",

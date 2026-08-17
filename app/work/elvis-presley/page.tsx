@@ -107,6 +107,7 @@ export default function ElvisPresleyPage() {
       <img
         src="/hero.png"
         alt="Through the Cover — hero"
+        fetchPriority="high"
         style={{
           display:  "block",
           width:    "100%",
@@ -183,6 +184,8 @@ export default function ElvisPresleyPage() {
         <img
           src="/loop 2.png"
           alt="Publication spread 1"
+          loading="lazy"
+          decoding="async"
           style={{
             display:    "block",
             width:      "calc(50% - 12px)",
@@ -194,6 +197,8 @@ export default function ElvisPresleyPage() {
         <img
           src="/elvis disco gallery.jpg"
           alt="Publication spread 2"
+          loading="lazy"
+          decoding="async"
           style={{
             display:    "block",
             width:      "calc(50% - 12px)",
@@ -269,6 +274,8 @@ export default function ElvisPresleyPage() {
         <img
           src="/elvis visual identity.- large png.png"
           alt="Visual identity — typeface and colour palette"
+          loading="lazy"
+          decoding="async"
           style={{ display: "block", width: "100%", height: "auto", marginLeft: "-12px" }}
         />
       </div>
@@ -286,6 +293,8 @@ export default function ElvisPresleyPage() {
             <img
               src={src}
               alt={alt}
+              loading="lazy"
+              decoding="async"
               style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>

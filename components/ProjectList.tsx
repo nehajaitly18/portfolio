@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, useInView } from "framer-motion";
 import { projects } from "@/data/projects";
@@ -44,10 +45,12 @@ function ProjectCard({
         {/* Thumbnail — full column width, no crop, no rounded corners */}
         {project.image && (
           <div className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" style={{ borderRadius: "8px", overflow: "hidden" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              width={0}
+              height={0}
+              sizes="(max-width: 640px) 100vw, 50vw"
               style={{
                 width:     "100%",
                 height:    "auto",
