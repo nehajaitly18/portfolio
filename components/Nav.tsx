@@ -91,12 +91,13 @@ export default function Nav() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      <style>{`
+        @keyframes nav-enter { from { opacity: 0; } to { opacity: 1; } }
+        .nav-header { animation: nav-enter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+      `}</style>
+      <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-[100] bg-white transition-all duration-500",
+          "nav-header fixed top-0 left-0 right-0 z-[100] bg-white transition-all duration-500",
           scrolled && "backdrop-blur-md bg-white/92"
         )}
       >
@@ -155,7 +156,7 @@ export default function Nav() {
             <span className="absolute -bottom-0.5 left-0 h-px bg-[var(--ink)] transition-all duration-300 w-0 group-hover:w-full" />
           </a>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Full-screen mobile menu */}
       <AnimatePresence>

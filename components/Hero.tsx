@@ -42,6 +42,7 @@ export default function Hero() {
           paddingTop:     "0",
           paddingBottom:  "0",
           overflow:       "hidden",
+          isolation:      "isolate",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
