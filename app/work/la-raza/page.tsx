@@ -196,7 +196,7 @@ export default function LaRazaPage() {
   return (
     <>
     <style>{`@media (max-width: 767px) { .la-raza-page { margin-top: -56px !important; } }`}</style>
-    <motion.div className="la-raza-page bg-[#111110]" animate={controls} style={{ marginTop: "-64px" }}>
+    <motion.div className="la-raza-page bg-[#111110]" animate={controls} style={{ marginTop: "-64px", isolation: "isolate" }}>
       <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}

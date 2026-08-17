@@ -101,7 +101,7 @@ export default function PennyStampsPage() {
         .penny-img-pair img { height: 260px !important; }
       }
     `}</style>
-    <motion.div className="penny-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+    <motion.div className="penny-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px", isolation: "isolate" }}>
       <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}

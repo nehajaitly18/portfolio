@@ -99,7 +99,7 @@ export default function ElvisPresleyPage() {
         .elvis-spread-pair > img { width: 100% !important; }
       }
     `}</style>
-    <motion.div className="elvis-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+    <motion.div className="elvis-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px", isolation: "isolate" }}>
       <BackButton />
 
       {/* ── 1. Hero Image — full-bleed ───────────────────────── */}

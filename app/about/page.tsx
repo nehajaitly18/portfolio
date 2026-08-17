@@ -78,6 +78,7 @@ function VinylCard() {
       position: "relative", overflow: "hidden", flexShrink: 0,
       border: "1px solid rgba(255,255,255,0.08)",
       borderRadius: 3,
+      isolation: "isolate",
     }}>
       <Image src="/music.jpeg" alt="Now playing" fill style={{ objectFit: "cover" }} />
       <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.48)" }} />

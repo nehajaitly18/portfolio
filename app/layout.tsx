@@ -41,9 +41,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-[var(--bg)]">
         <PageTransitionOverlay />
         <Cursor />
-        <ScrollProgress />
         <Nav />
         <main className="flex-1 pt-14 md:pt-16 isolate">
+          <ScrollProgress />
           <PageTransitionWrapper>{children}</PageTransitionWrapper>
         </main>
         <Footer />

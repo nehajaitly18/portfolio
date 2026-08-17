@@ -51,7 +51,7 @@ export default function MichiganArtsPage() {
   return (
     <>
       <style>{`@media (max-width: 767px) { .michigan-page { margin-top: -56px !important; } }`}</style>
-      <motion.div className="michigan-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px" }}>
+      <motion.div className="michigan-page bg-[var(--bg)]" animate={controls} style={{ marginTop: "-64px", isolation: "isolate" }}>
         <BackButton />
 
         {/* ── 1. Hero Image ─────────────────────────────────── */}

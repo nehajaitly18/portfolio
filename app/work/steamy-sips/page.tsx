@@ -112,6 +112,7 @@ function LoyaltyCardSection() {
         alignItems:      "center",
         justifyContent:  "center",
         padding:         "64px 32px",
+        isolation:       "isolate",
       }}
     >
       <style>{`

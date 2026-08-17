@@ -1422,6 +1422,7 @@ export default function WorkPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+      style={{ isolation: "isolate" }}
     >
     <motion.div className="bg-[var(--bg)]" animate={controls}>
       <style>{`@media (max-width: 767px) { .cs-single-video { max-width: 90% !important; } }`}</style>
