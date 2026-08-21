@@ -9,11 +9,18 @@ const EXPO = [0.16, 1, 0.3, 1] as const;
 
 const experience = [
   {
-    role: "VP of Creative Design",
-    org: "Michigan Advertising & Marketing",
-    period: "Sep 2025 — Present",
+    role: "UX/UI Intern",
+    org: "Paytm India",
+    period: "May — Jul 2025",
     details:
-      "Lead creative direction for Michigan's premier student advertising and marketing organization. Oversee brand strategy, campaign design, and mentor a team of designers across multiple client accounts.",
+      "Redesigned the micro-merchant loan application flow, reducing drop-off friction and improving accessibility for India's informal economy. Shipped to production within 6 weeks.",
+  },
+  {
+    role: "Teaching Assistant",
+    org: "UMSI",
+    period: "Jan 2026 — Present",
+    details:
+      "Support course instruction at the School of Information, helping students develop design thinking, research methodology, and UX fundamentals.",
   },
   {
     role: "Graphic Designer",
@@ -23,18 +30,11 @@ const experience = [
       "Design visual assets, print materials, and digital communications for ArtsEngine's cross-disciplinary arts programs at the University of Michigan.",
   },
   {
-    role: "Instructional Aide",
-    org: "UMSI",
-    period: "Jan 2026 — Present",
+    role: "VP of Creative Design",
+    org: "Michigan Advertising & Marketing",
+    period: "Sep 2025 — Present",
     details:
-      "Support course instruction at the School of Information, helping students develop design thinking, research methodology, and UX fundamentals.",
-  },
-  {
-    role: "UX/UI Intern",
-    org: "Paytm India",
-    period: "May — Jul 2025",
-    details:
-      "Redesigned the micro-merchant loan application flow, reducing drop-off friction and improving accessibility for India's informal economy. Shipped to production within 6 weeks.",
+      "Lead creative direction for Michigan's premier student advertising and marketing organization. Oversee brand strategy, campaign design, and mentor a team of designers across multiple client accounts.",
   },
 ];
 
@@ -212,6 +212,7 @@ function ExperienceRow({
   isLast: boolean;
   inView: boolean;
 }) {
+  // index still used for stagger animation delay
   const [open, setOpen] = useState(false);
 
   return (
@@ -226,7 +227,7 @@ function ExperienceRow({
         style={{
           width:      "100%",
           display:    "flex",
-          alignItems: "baseline",
+          alignItems: "center",
           gap:        16,
           padding:    "24px 0",
           background: "none",
@@ -235,61 +236,53 @@ function ExperienceRow({
           textAlign:  "left",
         }}
       >
-        <span style={{
-          fontFamily:    "var(--font-lato)",
-          fontSize:      11,
-          letterSpacing: "0.18em",
-          color:         "var(--ink-4)",
-          textTransform: "uppercase" as const,
-          minWidth:      28,
-          flexShrink:    0,
-        }}>
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span style={{
-          fontFamily: "var(--font-lato)",
-          fontSize:   16,
-          fontWeight: 400,
-          color:      "var(--ink)",
-          flex:       1,
-        }}>
-          {item.role}
-        </span>
-        <span
-          className="hidden sm:inline"
-          style={{
+        {/* Company + role stacked */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
+          <span style={{
+            fontFamily: "var(--font-lato)",
+            fontSize:   17,
+            fontWeight: 600,
+            color:      "var(--ink)",
+            lineHeight: 1.2,
+          }}>
+            {item.org}
+          </span>
+          <span style={{
             fontFamily: "var(--font-lato)",
             fontSize:   13,
+            fontWeight: 400,
             color:      "var(--ink-3)",
-            minWidth:   140,
-            flexShrink: 0,
-          }}
-        >
-          {item.org}
-        </span>
+            lineHeight: 1.3,
+          }}>
+            {item.role}
+          </span>
+        </div>
+
+        {/* Period */}
         <span
           className="hidden md:inline"
           style={{
             fontFamily:    "var(--font-lato)",
-            fontSize:      11,
+            fontSize:      12,
             color:         "var(--ink-4)",
             letterSpacing: "0.04em",
-            minWidth:      140,
             flexShrink:    0,
           }}
         >
           {item.period}
         </span>
+
+        {/* Toggle */}
         <span
           style={{
-            fontFamily:  "var(--font-lato)",
-            fontSize:    18,
-            color:       "var(--ink-3)",
-            transition:  "transform 0.3s cubic-bezier(0.16,1,0.3,1)",
-            display:     "inline-block",
-            transform:   open ? "rotate(45deg)" : "rotate(0deg)",
-            flexShrink:  0,
-            lineHeight:  1,
+            fontFamily: "var(--font-lato)",
+            fontSize:   18,
+            color:      "var(--ink)",
+            transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1)",
+            display:    "inline-block",
+            transform:  open ? "rotate(45deg)" : "rotate(0deg)",
+            flexShrink: 0,
+            lineHeight: 1,
           }}
         >
           +
@@ -305,19 +298,18 @@ function ExperienceRow({
             transition={{ duration: 0.35, ease: EXPO }}
             style={{ overflow: "hidden" }}
           >
-            <div style={{ paddingBottom: 24, paddingLeft: 44 }}>
-              {/* Org + period on mobile (hidden on md+) */}
+            <div style={{ paddingBottom: 24 }}>
+              {/* Period on mobile */}
               <p style={{
                 fontFamily:    "var(--font-lato)",
                 fontSize:      12,
                 color:         "var(--ink-4)",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase" as const,
-                marginBottom:  8,
+                letterSpacing: "0.04em",
+                marginBottom:  12,
               }}
-                className="sm:hidden"
+                className="md:hidden"
               >
-                {item.org} · {item.period}
+                {item.period}
               </p>
               <p style={{
                 fontFamily: "var(--font-lato)",
@@ -405,7 +397,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left", padding: "32px 24px 0", maxWidth: "640px", margin: "0 auto" }}>
+      <div className="max-w-[720px] mx-auto px-6 md:px-12" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left", paddingTop: "32px" }}>
         <p style={{
           fontFamily: "var(--font-lato)",
           fontSize:   "17px",
@@ -436,17 +428,16 @@ export default function AboutPage() {
           paddingBottom: "clamp(64px, 8vw, 96px)",
         }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="max-w-[720px] mx-auto px-6 md:px-12">
 
-          <motion.span
+          <motion.h2
             initial={{ opacity: 0 }}
             animate={expInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="section-label"
-            style={{ display: "block", marginBottom: 48 }}
+            style={{ display: "block", marginBottom: 48, fontFamily: "Georgia, serif", fontWeight: 400, fontSize: "clamp(1.1rem, 2.5vw, 1.625rem)", letterSpacing: "-0.02em", color: "var(--ink)" }}
           >
             Experience
-          </motion.span>
+          </motion.h2>
 
           {/* Expanding list */}
           <div style={{ borderTop: "1px solid var(--border)" }}>
