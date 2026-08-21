@@ -79,14 +79,14 @@ export default function Cursor() {
         style={{ top: "-200px", left: "-200px" }}
       >
         <div
-          className="flex items-center justify-center px-4 h-8 rounded-full bg-[#111110] whitespace-nowrap transition-all duration-250"
+          className="flex items-center justify-center px-6 h-10 rounded-full bg-[#111110] whitespace-nowrap transition-all duration-250"
           style={{
             opacity: hasLabel ? 1 : 0,
             transform: hasLabel ? "scale(1)" : "scale(0.6)",
             transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
-          <span className="text-white text-[12px] font-medium tracking-[0.06em]" style={{ fontFamily: "var(--font-lato)" }}>
+          <span className="text-white text-[14px] font-medium tracking-[0.06em]" style={{ fontFamily: "var(--font-lato)" }}>
             {label ?? ""}
           </span>
         </div>

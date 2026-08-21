@@ -64,14 +64,14 @@ export default function Hero() {
           style={{
             fontFamily:    "lato, sans-serif",
             fontStyle:     "normal",
-            fontWeight:    100,
+            fontWeight:    300,
             fontSize:      "clamp(17px, 1.8vw, 25px)",
             color:         "#3d3d3c",
             textAlign:     "center",
             letterSpacing: "-0.01em",
             lineHeight:    "1.25",
             margin:        "0",
-            marginTop:     "-40px",
+            marginTop:     "-24px",
             paddingBottom: "56px",
             paddingLeft:   "24px",
             paddingRight:  "24px",
@@ -79,7 +79,7 @@ export default function Hero() {
             zIndex:        1,
           }}
         >
-          I&apos;m a visual designer who makes<br />thoughtful design feel effortless
+          I&apos;m a visual designer who makes thoughtful design feel effortless
         </p>
       </section>
     </>

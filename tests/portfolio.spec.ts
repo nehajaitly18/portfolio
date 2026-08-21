@@ -24,16 +24,12 @@ test.describe("Hero", () => {
     await expect(page.locator(".hl-teal")).toBeVisible();
   });
 
-  test("hero headline uses Playfair Display italic", async ({ page }) => {
-    const headline = page.locator("section span").first();
-    const fontFamily = await headline.evaluate(
+  test("project title uses Georgia", async ({ page }) => {
+    const title = page.locator("[data-cursor-label]").first().locator("div").first();
+    const fontFamily = await title.evaluate(
       (el) => window.getComputedStyle(el).fontFamily
     );
-    const fontStyle = await headline.evaluate(
-      (el) => window.getComputedStyle(el).fontStyle
-    );
-    expect(fontFamily.toLowerCase()).toContain("playfair");
-    expect(fontStyle).toBe("italic");
+    expect(fontFamily.toLowerCase()).toContain("georgia");
   });
 
   test("hero headline font size is large (>=40px)", async ({ page }) => {
